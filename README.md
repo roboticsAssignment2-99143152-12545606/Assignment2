@@ -26,7 +26,7 @@ The ABB robots are different, however still supported well by the manufacturer, 
 
 % This option is for the two-armed robot
 
-We have decided to use the two-armed robot for two key reasons.
+We have decided to use the two-armed robot supplied by ABB for two key reasons.
 1. It doubles our ability to collect and pour drinks, increasing the system speed
 2. It adds complexity and makes the project more appealing
 
@@ -35,6 +35,11 @@ https://new.abb.com/products/robotics/industrial-robots/irb-14000-yumi
 
 % This option is for the single-armed robot
 
+We have decided to use the one-armed robot supplied by ABB.
 
 Reference:
 https://new.abb.com/products/robotics/industrial-robots/irb-14050-single-arm-yumi
+
+A few notes on the robots I just realised
+- 7 DOF > added difficulty
+- 500g payload capacity (maybe acceptable - not great)
