@@ -20,9 +20,15 @@ The plan is to have the robotic arms complete a number of motions which will ena
 
 ROBOTIC ARM CHOICE (100 words)
 ----------------------------------
+We have settled on robots from ABB, largely because we wanted to chose something different from the robots available in class. 
+
+The ABB robots are different, however still supported well by the manufacturer, meaning we have full technical drawings and 3D models.
+
 % This option is for the two-armed robot
 
-
+We have decided to use the two-armed robot for two key reasons.
+1. It doubles our ability to collect and pour drinks, increasing the system speed
+2. It adds complexity and makes the project more appealing
 
 Reference:
 https://new.abb.com/products/robotics/industrial-robots/irb-14000-yumi
