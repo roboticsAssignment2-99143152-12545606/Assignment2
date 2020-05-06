@@ -14,32 +14,27 @@ A robotic arm will collect a pattern of drinks and pour them into the target gla
 
 We have chosen this project because we wanted to create something interesting, whilst still being technically challenging. We also like this concept because it opens up the opportunity to use one robot, two robots or a multi-armed robot.
 
-To acomplish this task, we will be using MATLAB and Peter Corkes Robotics Toolbox.
+To acomplish this task, we will be using MATLAB and Peter Corkes Robotics Toolbox to simulate the environemnt of the robot and the movements of the robot.
 
 The plan is to have the robotic arms complete a number of motions which will enable it to pour a drink, stir a drink and mix a drink. An environment will be built around it to secure the robot and serve the bottles to the robotic arm (via a rotating plate).
 
 ROBOTIC ARM CHOICE (100 words)
 ----------------------------------
-We have settled on robots from ABB, largely because we wanted to chose something different from the robots available in class. 
+After significant consideration about robotic arm choice, we decided to move ahead with the Sawyer robot, supplied by Rethink Robotics.
 
-The ABB robots are different, however still supported well by the manufacturer, meaning we have full technical drawings and 3D models.
+As a group, we welcome the challenge that a 7 DOF robot will offer and the payload capacity of 4kg is more than adequate for the application at hand. 
 
-% This option is for the two-armed robot
-
-We have decided to use the two-armed robot supplied by ABB for two key reasons.
-1. It doubles our ability to collect and pour drinks, increasing the system speed
-2. It adds complexity and makes the project more appealing
+In addition to this, we like Sawyers inclusion of a multitude of sensors, so that the system would be plug-and-plag, with minmal external hardware required should this project be realised.
 
 Reference:
-https://new.abb.com/products/robotics/industrial-robots/irb-14000-yumi
+https://blog.robotiq.com/new-collaborative-robot-sawyer-from-rethink-robotics
 
-% This option is for the single-armed robot
+MISCELLANEOUS REFERENCES
+----------------------------------
+These references are for the authors use only. A record of recent activity.
 
-We have decided to use the one-armed robot supplied by ABB.
+Externally sourced SAWYER CAD
+https://grabcad.com/library/robot-marca-sawyer-1
 
-Reference:
-https://new.abb.com/products/robotics/industrial-robots/irb-14050-single-arm-yumi
-
-A few notes on the robots I just realised
-- 7 DOF > added difficulty
-- 500g payload capacity (maybe acceptable - not great)
+Forum Post (CAD)
+https://rethinkrobotics.interaforum.com/topic/110-sawyer-cad-model/
