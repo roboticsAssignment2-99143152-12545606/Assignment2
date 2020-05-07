@@ -24,7 +24,7 @@ After significant consideration about robotic arm choice, we decided to move ahe
 
 As a group, we welcome the challenge that a 7 DOF robot will offer and the payload capacity of 4kg is more than adequate for the application at hand. 
 
-In addition to this, we like Sawyers inclusion of a multitude of sensors, so that the system would be plug-and-plag, with minmal external hardware required should this project be realised.
+In addition to this, we like Sawyers inclusion of a multitude of sensors, so that the system would be plug-and-play, with minmal external hardware required should this project be realised.
 
 Reference:
 https://blog.robotiq.com/new-collaborative-robot-sawyer-from-rethink-robotics
