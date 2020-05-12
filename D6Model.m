@@ -4,7 +4,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         currentJoints;
         location;
         workspace;
-        plyData;   
+        plyData;
         name;
         pointCloud;
         qValueMatrix;
@@ -38,34 +38,34 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             counter = 1;
             count = 1;
             tic
-
+            
             for q1 = qlim(1,1):stepRads:qlim(1,2)
                 for q2 = qlim(2,1):stepRads:qlim(2,2)
                     for q3 = qlim(3,1):stepRads:qlim(3,2)
                         for q4 = qlim(4,1):stepRads:qlim(4,2)
                             for q5 = qlim(5,1):stepRads:qlim(5,2)
                                 % Don't need to worry about joint 6, just assume it=0
-                                    q6 = 0;
-%                               for q6 = qlim(6,1):stepRads:qlim(6,2)
-                                    q = [q1,q2,q3,q4,q5,q6];
-                                    if(self.withinBounds(q) == 1)
-                                        qValueMatrix(counter,:) = q;
-                                        tr = self.model.fkine(q);                        
-                                        pointCloud(counter,:) = tr(1:3,4)';
-                                        counter = counter + 1;                                    
-                                    end
-                                    count = count + 1;
-                                    if mod(count/pointCloudeSize * 100,1) == 0
-                                        display(['After ',num2str(toc),' seconds, completed ',num2str(count/pointCloudeSize * 100),'% of poses']);
-                                    end
-%                               end
+                                q6 = 0;
+                                %                               for q6 = qlim(6,1):stepRads:qlim(6,2)
+                                q = [q1,q2,q3,q4,q5,q6];
+                                if(self.withinBounds(q) == 1)
+                                    qValueMatrix(counter,:) = q;
+                                    tr = self.model.fkine(q);
+                                    pointCloud(counter,:) = tr(1:3,4)';
+                                    counter = counter + 1;
+                                end
+                                count = count + 1;
+                                if mod(count/pointCloudeSize * 100,1) == 0
+                                    display(['After ',num2str(toc),' seconds, completed ',num2str(count/pointCloudeSize * 100),'% of poses']);
+                                end
+                                %                               end
                             end
                         end
                     end
                 end
             end
-%             ReducePointCloud(pointCloud);    
-
+            %             ReducePointCloud(pointCloud);
+            
             for i = 1 : pointCloudeSize
                 if pointCloud(i,:) == self.model.base(1:3,4)'
                     pointCloud = pointCloud(1:i-1,:);
@@ -86,7 +86,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         
         function ReducePointCloud(self, pointCloud)
             [pCloudSize, c] = size(pointCloud);
-
+            
             for i = 1 : pCloudSize
                 if pointCloud(i,:) == self.model.base(1:3,4)'
                     pointCloud = pointCloud(1:i-1,:);
@@ -104,7 +104,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             else
                 [k, Vol] = convhull(self.pointCloud);
                 self.Max_Vol = Vol;
-            end             
+            end
         end
         
         function [Reach, index] = MaxRobotReach(self)
@@ -114,15 +114,15 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             else
                 [r,c] = size(self.pointCloud);
                 output = zeros(r,1);
-
+                
                 for i=1:r
                     output(i,1) = norm(self.model.base(1:3,4)' - self.pointCloud(i,:));
                 end
-
+                
                 [Reach,index] = max(output);
                 self.Max_Reach = Reach;
-            end             
-        end           
+            end
+        end
         
         function PlotAndColour(self)
             for linkIndex = 0:self.model.n
@@ -149,24 +149,24 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                     disp(ME_1);
                     continue;
                 end
-            end    
+            end
         end
         
         function getRobot(self, name) % Setup Robot Parameters
             pause(0.001);
-            L1 = Link('d',0.1,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-%             L2 = Link('d',0,'a',-0.1,'alpha',0,'qlim',deg2rad([-180 0]));
-%             L3 = Link('d',0,'a',-0.1,'alpha',0,'qlim',deg2rad([-135 135]));
-%             L4 = Link('d',0.1,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-%             L5 = Link('d',0.1,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]));
-%             L6 = Link('d',0.1,'a',0,'alpha',0,'qlim',deg2rad([-360 360]));
+            L1 = Link('d',0.687,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]));
+            L2 = Link('d',0,'a',0.687,'alpha',0,'qlim',deg2rad([-180 180]));
+            L3 = Link('d',0,'a',0,'alpha',pi/2,'offset',pi/2,'qlim',deg2rad([-180 180]));
+            L4 = Link('d',0.56,'a',0.,'alpha',pi/2,'qlim',deg2rad([-180 180]));
+            L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
+            L6 = Link('d',0.23125,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
             
             pause(0.0001)
-            self.model = SerialLink([L1], 'name', name);             
+            self.model = SerialLink([L1 L2 L3 L4 L5 L6], 'name', name);
         end
         
         function [t] = withinBounds(self, q)
-%             self.currentJoints = self.model.getpos();
+            %             self.currentJoints = self.model.getpos();
             Joints = q;
             t = 1;
             
