@@ -154,15 +154,15 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         
         function getRobot(self, name) % Setup Robot Parameters
             pause(0.001);
-            L1 = Link('d',0.18,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-            L2 = Link('d',0,'a',-0.24365,'alpha',0,'qlim',deg2rad([-180 0]));
-            L3 = Link('d',0,'a',-0.21325,'alpha',0,'qlim',deg2rad([-135 135]));
-            L4 = Link('d',0.11235,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-            L5 = Link('d',0.08535,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]));
-            L6 = Link('d',0.0819,'a',0,'alpha',0,'qlim',deg2rad([-360 360]));
+            L1 = Link('d',0.1,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
+%             L2 = Link('d',0,'a',-0.1,'alpha',0,'qlim',deg2rad([-180 0]));
+%             L3 = Link('d',0,'a',-0.1,'alpha',0,'qlim',deg2rad([-135 135]));
+%             L4 = Link('d',0.1,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
+%             L5 = Link('d',0.1,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]));
+%             L6 = Link('d',0.1,'a',0,'alpha',0,'qlim',deg2rad([-360 360]));
             
             pause(0.0001)
-            self.model = SerialLink([L1 L2 L3 L4 L5 L6], 'name', name);             
+            self.model = SerialLink([L1], 'name', name);             
         end
         
         function [t] = withinBounds(self, q)
