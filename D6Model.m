@@ -154,10 +154,11 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         
         function getRobot(self, name) % Setup Robot Parameters
             pause(0.001);
-            L1 = Link('d',0.867,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-            L2 = Link('d',0,'a',0.687,'alpha',0,'qlim',deg2rad([-180 180]));
-            L3 = Link('d',0,'a',0,'alpha',pi/2,'offset',pi/2,'qlim',deg2rad([-180 180]));
-            L4 = Link('d',0.56,'a',0.,'alpha',pi/2,'qlim',deg2rad([-180 180]));
+            % NO OFFSET
+            L1 = Link('d',0.700,'a',0.09,'alpha',pi/2,'qlim',deg2rad([-360 360]));
+            L2 = Link('d',-0.350,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
+            L3 = Link('d',0.165,'a',0,'alpha',pi/2,'offset',pi/2,'qlim',deg2rad([-180 180]));
+            L4 = Link('d',0.3128,'a',0,'alpha',pi/2,'qlim',deg2rad([-180 180]));
             L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
             L6 = Link('d',0.23125,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
             
