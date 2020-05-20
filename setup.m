@@ -7,7 +7,10 @@ close all
 set(0,'DefaultFigureWindowStyle','docked')
 clear
 clc
-run C:\Users\Jay\Data\Robotics\rvctools\startup_rvc.m
+% Mac run command
+run /Users/jonathanwilde/git/Robotics/rvctools/startup_rvc.m
+% Windows run command
+%run C:\Users\Jay\Data\Robotics\rvctools\startup_rvc.m
 
 %%
 hold on
