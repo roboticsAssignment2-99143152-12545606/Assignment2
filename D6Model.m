@@ -15,17 +15,29 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
     
     methods
         function self = D6Model(name,workspace,location,draw)
-            self.workspace = workspace;
-            self.getRobot(name);
-            self.currentJoints = zeros(1,6);
-            self.model.base = location;
-            self.location = location;
-            self.name = name;
-            
-            if draw
+            if nargin == 0
+                self.workspace = [-2,2,-2,2,0,2];
+                self.getRobot("test");
+                self.currentJoints = zeros(1,6);
+                self.model.base = transl(0,0,0);
+                self.location = transl(0,0,0);
+                self.name = "test";
                 self.PlotAndColour();
-            end
+                
+                self.model.teach()
+                
+            else
+                self.workspace = workspace;
+                self.getRobot(name);
+                self.currentJoints = zeros(1,6);
+                self.model.base = location;
+                self.location = location;
+                self.name = name;
             
+                if draw
+                    self.PlotAndColour();
+                end
+            end
         end
         
         function [pointCloud] = GeneratePointCloud(self, stepSize)
@@ -155,11 +167,11 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         function getRobot(self, name) % Setup Robot Parameters
             pause(0.001);
             % NO OFFSET
-            L1 = Link('d',0.700,'a',0,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-            L2 = Link('d',-0.350,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
-            L3 = Link('d',0.165,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
+            L1 = Link('d',0.700,'a',0,'alpha',pi/2,'offset',pi/2,'qlim',deg2rad([-360 360]));
+            L2 = Link('d',0,'a',-0.350,'alpha',0,'qlim',deg2rad([-180 180]));
+            L3 = Link('d',0.0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
             L4 = Link('d',0.350,'a',0,'alpha',pi/2,'qlim',deg2rad([-180 180]));
-            L5 = Link('d',0.097,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
+            L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
             L6 = Link('d',0.023,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
             
             pause(0.0001)
