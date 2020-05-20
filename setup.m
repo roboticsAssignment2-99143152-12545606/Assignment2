@@ -14,7 +14,7 @@ hold on
 % floorOffset = -0.8905/2; %messured from bounding box
 % workSize = 10;
 % workspace = [-workSize workSize -workSize workSize (2*0) workSize];
-workspace = [-3 3 -3 3 -1 3]
+workspace = [-2 3 -2 2 0 2]
 
 % L1 = Link('d',0.687,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]));
 % L2 = Link('d',0,'a',0.687,'alpha',0,'qlim',deg2rad([-180 180]));
