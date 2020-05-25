@@ -8,9 +8,9 @@ set(0,'DefaultFigureWindowStyle','docked')
 clear
 clc
 % Mac run command
-run /Users/jonathanwilde/git/Robotics/rvctools/startup_rvc.m
+%run /Users/jonathanwilde/git/Robotics/rvctools/startup_rvc.m
 % Windows run command
-%run C:\Users\Jay\Data\Robotics\rvctools\startup_rvc.m
+run C:\Git\Robotics\rvctools\startup_rvc.m
 
 %%
 hold on
