@@ -172,7 +172,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             L3 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
             L4 = Link('d',0.515,'a',0,'alpha',pi/2,'qlim',deg2rad([-180 180]));
             L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
-            L6 = Link('d',0.1,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
+            L6 = Link('d',0.11,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
             
             pause(0.0001)
             self.model = SerialLink([L1 L2 L3 L4 L5 L6], 'name', name);
