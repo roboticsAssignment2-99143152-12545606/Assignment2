@@ -13,7 +13,7 @@ classdef Objects < handle % class to handle setting up of the static body
                
         function plotAndColour(self, workspace, ModelName, ModelNum, location)
             for linkIndex = 0:1
-                [ faceData, vertexData, plyData{linkIndex + 1} ] = plyread([ModelName,'.ply'],'tri');
+                [ faceData, vertexData, plyData{linkIndex + 1} ] = plyread(['Objects/',ModelName,'.ply'],'tri');
                 self.model.faces{linkIndex + 1} = faceData;
                 self.model.points{linkIndex + 1} = vertexData;
             end
