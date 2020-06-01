@@ -28,10 +28,14 @@ workspace = [-2 3 -2 2 0 2]
 N6_1 = D6Model('N6_1',workspace, transl(0,0,0));
 
 % N6_1.model.teach();
-q = deg2rad([0,50,50,0,0,0])
+q = deg2rad([90,90,90,0,0,0])
 N6_1.model.animate(q);
-MoveWObjects(N6_1, transl(0.3,0.3,0.1),[]);
-movementShake(N6_1, [], 1, [])
+MoveWObjects(N6_1, transl(-0.33,0,0.4),[]);
+% N6_1.model.teach
+% 
+% pause(0.1);
+
+movementStir(N6_1, [], 4, [])
 
 'done'
 
