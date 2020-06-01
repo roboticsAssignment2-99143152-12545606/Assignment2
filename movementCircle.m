@@ -147,7 +147,7 @@ figure(1)
 plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
 % Robot.model.animate(qMatrix)
 if abs(axis) > 1
-    qMatrix(:,6) = -s;
+    qMatrix(:,6) = -s/3;
 end
 MoveQMatrix(Robot,qMatrix,Objects);
 
