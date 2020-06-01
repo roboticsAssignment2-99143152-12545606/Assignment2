@@ -30,12 +30,11 @@ bottle.model.delay = 0;
 % N6_1.model.teach();
 q = deg2rad([90,90,90,0,0,0])
 N6_1.model.animate(q);
-MoveWObjects(N6_1, transl(-0.33,0,0.4),[]);
+MoveWObjects(N6_1, transl(-0.33,0,0.4) * troty(90),[]);
 % N6_1.model.teach
 % 
 % pause(0.1);
-
-movementPour(N6_1, [], 1, [bottle])
+movementPour(N6_1, [], 3, [bottle])
 
 'done'
 
