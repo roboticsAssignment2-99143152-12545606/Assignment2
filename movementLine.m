@@ -49,8 +49,8 @@ end
 mat = [x',theta'];
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
 q0 = zeros(1,6);                                                            % Initial guess for joint angles
-qMatrix(1,:) = Robot.model.ikcon(Robot.model.fkine(Robot.model.getpos),q0);                                            % Solve joint angles to achieve first waypoint
-
+% qMatrix(1,:) = Robot.model.ikcon(Robot.model.fkine(Robot.model.getpos),q0);                                            % Solve joint angles to achieve first waypoint
+qMatrix(1,:) = Robot.model.getpos;
 % 1.4) Track the trajectory with RMRC
 for i = 1:steps-1
     T = Robot.model.fkine(qMatrix(i,:));                                           % Get forward transformation at current joint state
