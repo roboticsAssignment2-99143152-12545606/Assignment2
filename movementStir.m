@@ -7,7 +7,6 @@ iterations = 4
 
 for i=0:iterations  
     movementCircle(Robot, p1, Time/iterations, Objects);
-    i
 end
 
 end
