@@ -35,9 +35,7 @@ MoveWObjects(N6_1, transl(-0.33,0,0.4),[]);
 % 
 % pause(0.1);
 
-movementPour(N6_1, [], 1, [])
-
-bottle = Objects('WildTurkey','1',workspace, transl(1,0,0.35));
+movementStir(N6_1, [], 3, [])
 
 'done'
 
