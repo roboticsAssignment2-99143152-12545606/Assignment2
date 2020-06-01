@@ -181,8 +181,8 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
 %               J4 (Wrist Roll): +/-200 deg
 %               J5 (Wrist Bend): +/-125 deg
 %               J6 (Wrist Twist): +/-360 deg
-            L1 = Link('d',0.867,'a',0.15,'alpha',pi/2,'qlim',deg2rad([-180 180]));
-            L2 = Link('d',0,'a',0.350,'alpha',0,'qlim',deg2rad([-180 180]));
+            L1 = Link('d',0.867,'a',0.15,'alpha',pi/2,'qlim',deg2rad([-360 360]));
+            L2 = Link('d',0,'a',0.350,'alpha',0,'qlim',deg2rad([-360 360]));
             L3 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
             L4 = Link('d',0.515,'a',0,'alpha',pi/2,'qlim',deg2rad([-200 200]));
             L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-125 125]));
