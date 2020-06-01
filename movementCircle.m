@@ -1,4 +1,4 @@
-function [] = movementCircle(Robot, GoalPose, Time, Objects)
+function [] = movementCircle(Robot, GoalPose, Time, Objects, axis, revolution)
 %movementCircle this function will simulate stiring for the robot
 %   code mainly used from lab9
 
@@ -13,6 +13,10 @@ delta = 2*pi/steps; % Small angle change
 epsilon = 0.1;      % Threshold value for manipulability/Damped Least Squares
 W = diag([1 1 1 0 0 0.8]);    % Weighting matrix for the velocity vector
 
+if ~exist('revolution')
+    revolution = 1;
+end
+
 % 1.2) Allocate array data
 m = zeros(steps,1);             % Array for Measure of Manipulability
 qMatrix = zeros(steps,6);       % Array for joint anglesR
@@ -24,7 +28,7 @@ angleError = zeros(3,steps);    % For plotting trajectory error
 
 % user james
 % get xyz from poses
-p1 = Robot.getPose
+p1 = Robot.getPose;
 p2 = GoalPose;
 
 %plot start
@@ -34,23 +38,58 @@ cords1 = p1(1:3,4);
 cords2 = p2(1:3,4);
 
 % 1.3) Set up trajectory, initial pose
-s = lspb(0,2*pi,steps);
+s = lspb(0,revolution*2*pi,steps);
 r = 0.06;
-
-xs = r * cos(s) + cords2(1);                % Trapezoidal trajectory scalar
-ys = r * sin(s) + cords2(2);                % Trapezoidal trajectory scalar
-% xs = r * cos(s);                % Trapezoidal trajectory scalar
-% ys = r * sin(s);                % Trapezoidal trajectory scalar
-zs = lspb(cords1(3),cords1(3),steps);                % Trapezoidal trajectory scalar
-
+% for on the floor xy circles
+if axis == 1
+    xs = r * cos(s) + cords2(1);                % Trapezoidal trajectory scalar
+    ys = r * sin(s) + cords2(2);                % Trapezoidal trajectory scalar
+    % xs = r * cos(s);                % Trapezoidal trajectory scalar
+    % ys = r * sin(s);                % Trapezoidal trajectory scalar
+    zs = lspb(cords1(3),cords1(3),steps);                % Trapezoidal trajectory scalar
+    
+    rx = 0;
+    px = 0;
+    yx = -1;
+    
+    W = diag([1 1 1 0 0 0.8]);    % Weighting matrix for the velocity vector
+end
+% for on the air zx circles
+if axis == 2
+    xs = r * cos(s) + cords2(1);                % Trapezoidal trajectory scalar
+    ys = lspb(cords1(2),cords1(2),steps);                 % Trapezoidal trajectory scalar
+    % xs = r * cos(s);                % Trapezoidal trajectory scalar
+    % ys = r * sin(s);                % Trapezoidal trajectory scalar
+    zs = r * sin(s) + cords2(3);               % Trapezoidal trajectory scalar
+    
+    rx = 90;
+    px = 90;
+    yx = -90;
+    
+    W = diag([1 1 1 0 0 0.8]);    % Weighting matrix for the velocity vector
+end
+% for on the air zy circles
+if axis == 3
+    xs = lspb(cords1(1),cords1(1),steps);               % Trapezoidal trajectory scalar
+    ys = r * cos(s) + cords2(2);                 % Trapezoidal trajectory scalar
+    % xs = r * cos(s);                % Trapezoidal trajectory scalar
+    % ys = r * sin(s);                % Trapezoidal trajectory scalar
+    zs = r * sin(s) + cords2(3);               % Trapezoidal trajectory scalar
+    
+    rx = -90;
+    px = -90;
+    yx = 90;
+    
+    W = diag([1 1 1 0.5 0.5 0]);    % Weighting matrix for the velocity vector
+end
 
 for i=1:steps
     x(1,i) = xs(i); % Points in x
     x(2,i) = ys(i); % Points in y
     x(3,i) = zs(i); % Points in z
-    theta(1,i) = 0;                 % Roll angle
-    theta(2,i) = 0;            % Pitch angle
-    theta(3,i) = -1;                 % Yaw angle
+    theta(1,i) = rx;                 % Roll angle
+    theta(2,i) = px;            % Pitch angle
+    theta(3,i) = yx;                 % Yaw angle
 end
 mat = [x',theta'];
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
