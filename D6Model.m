@@ -14,8 +14,12 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
     end
     
     methods
-        function self = D6Model(name,workspace,location,draw)
+        function self = D6Model(name,workspace,location)
+            %if run with no args then run demo
             if nargin == 0
+                close all
+                set(0,'DefaultFigureWindowStyle','docked')                
+                
                 self.workspace = [-2,2,-2,2,0,2];
                 self.getRobot("test");
                 self.currentJoints = zeros(1,6);
@@ -34,10 +38,12 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                 self.location = location;
                 self.name = name;
             
-                if draw
-                    self.PlotAndColour();
-                end
+                self.PlotAndColour();
             end
+        end
+        
+        function [pose] = getPose(self)
+            pose = self.model.fkine(self.model.getpos);
         end
         
         function [pointCloud] = GeneratePointCloud(self, stepSize)
@@ -167,12 +173,20 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         function getRobot(self, name) % Setup Robot Parameters
             pause(0.001);
             % This begins @ joint 1
+            % joint values from
+            % https://epson.com/For-Work/Robots/6-Axis/Flexion-N6-Compact-6-Axis-Robots---1000mm/p/RN6-A10SS73SS
+%               J1 (Turning): +/-180 deg
+%               J2 (Lower Arm): +/-180 deg
+%               J3 (Upper Arm): +/-180 deg
+%               J4 (Wrist Roll): +/-200 deg
+%               J5 (Wrist Bend): +/-125 deg
+%               J6 (Wrist Twist): +/-360 deg
             L1 = Link('d',0.867,'a',0.15,'alpha',pi/2,'qlim',deg2rad([-360 360]));
-            L2 = Link('d',0,'a',0.350,'alpha',0,'qlim',deg2rad([-180 180]));
+            L2 = Link('d',0,'a',0.350,'alpha',0,'qlim',deg2rad([-360 360]));
             L3 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
-            L4 = Link('d',0.515,'a',0,'alpha',pi/2,'qlim',deg2rad([-180 180]));
-            L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-180 180]));
-            L6 = Link('d',0.11,'a',0,'alpha',0,'qlim',deg2rad([-180 180]));
+            L4 = Link('d',0.515,'a',0,'alpha',pi/2,'qlim',deg2rad([-200 200]));
+            L5 = Link('d',0,'a',0,'alpha',-pi/2,'qlim',deg2rad([-125 125]));
+            L6 = Link('d',0.11,'a',0,'alpha',0,'qlim',deg2rad([-360 360]));
             
             pause(0.0001)
             self.model = SerialLink([L1 L2 L3 L4 L5 L6], 'name', name);
