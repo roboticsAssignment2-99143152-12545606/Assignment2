@@ -133,7 +133,8 @@ end
 % 1.5) Plot the results
 figure(1)
 plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
-Robot.model.animate(qMatrix)
+% Robot.model.animate(qMatrix)
+MoveQMatrix(Robot,qMatrix,Objects);
 
 % for reporting and error checking
 % for i = 1:6
