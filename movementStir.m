@@ -5,8 +5,8 @@ p1 = Robot.getPose;
 iterations = 4
 % movementCircle(Robot, GoalPose, Time, Objects)
 
-for i=0:iterations  
-    movementCircle(Robot, p1, Time/iterations, Objects);
+for i=1:iterations  
+    movementCircle(Robot, p1, Time/iterations, Objects, 1);
 end
 
 end
