@@ -34,6 +34,8 @@ workspace = [-2 3 -2 2 0 2]
 % pause();
 N6_1 = D6Model('N6_1',workspace, transl(0,0,0), 1);
 
+bottle = Objects('WildTurkey','1',workspace, transl(1,0,0.35));
+
 N6_1.model.teach();
 
 end
