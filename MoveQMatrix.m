@@ -4,6 +4,9 @@ function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects)
 
 for qStep = 1:size(qMatrix,1)
     q = qMatrix(qStep,:);
+    
+    %col check
+    
     Robot_Arm.model.animate(q);
     if isempty(Objects) == 0
         newBase = Robot_Arm.model.fkine(q);
