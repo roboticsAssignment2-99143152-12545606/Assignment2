@@ -4,14 +4,31 @@ classdef Objects < handle % class to handle setting up of the static body
         plyData;
         workspace;
         location;
+        rot;
+        radi;
     end
     
     methods
-        function self = Objects(ModelName, ModelNum, workspace, location)
+        function self = Objects(ModelName, ModelNum, workspace, location, rot, radi)
+            % setup object paramas for later use if unused will default
+            if ~exist('rot')
+                self.rot = 0;
+            else 
+                self.rot = rot;
+            end
+            if ~exist('radi')
+                self.radi = 0;
+            else 
+                self.radi = radi;
+            end
+            
+            % init object as one link robot
             self.plotAndColour(workspace, ModelName, ModelNum, location);
         end
                
         function plotAndColour(self, workspace, ModelName, ModelNum, location)
+
+            
             for linkIndex = 0:1
                 [ faceData, vertexData, plyData{linkIndex + 1} ] = plyread(['Objects/PLY/',ModelName,'.ply'],'tri');
                 self.model.faces{linkIndex + 1} = faceData;

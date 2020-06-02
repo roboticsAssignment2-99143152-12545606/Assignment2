@@ -42,9 +42,9 @@ for i=1:steps
     x(1,i) = xs(i); % Points in x
     x(2,i) = ys(i); % Points in y
     x(3,i) = zs(i); % Points in z
-    theta(1,i) = 0;                 % Roll angle
-    theta(2,i) = 0;            % Pitch angle
-    theta(3,i) = 0;                 % Yaw angle
+    theta(1,i) = -90;                 % Roll angle
+    theta(2,i) = -90;            % Pitch angle
+    theta(3,i) = 90;                 % Yaw angle
 end
 mat = [x',theta'];
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
@@ -87,7 +87,8 @@ end
 % 1.5) Plot the results
 figure(1)
 plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
-Robot.model.animate(qMatrix)
+% Robot.model.animate(qMatrix)
+MoveQMatrix(Robot,qMatrix,Objects);
 
 % for reporting and error checking
 % for i = 1:6
