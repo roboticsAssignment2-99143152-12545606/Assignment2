@@ -45,6 +45,8 @@ classdef Objects < handle % class to handle setting up of the static body
             self.model.base = location;
             self.model.plot3d(0, 'workspace', workspace);
             
+            self.model.delay = 0;
+            
             for linkIndex = 0:self.model.n
                 handles = findobj('Tag', self.model.name);
                 h = get(handles,'UserData');
