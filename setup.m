@@ -34,7 +34,7 @@ MoveWObjects(N6_1, transl(-0.33,0,0.4) * troty(90),[]);
 % N6_1.model.teach
 % 
 % pause(0.1);
-movementPour(N6_1, [], 3, [bottle])
+movementPour(N6_1, [], 10, [bottle], 50)
 
 'done'
 
