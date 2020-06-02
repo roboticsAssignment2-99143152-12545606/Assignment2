@@ -1,4 +1,4 @@
-function [] = movementLine(Robot, GoalPose, Time, Objects)
+function [] = movementLine(Robot, GoalPose, Time, Objects, stepSize)
 %movementLine this function will simulate shaking for the robot
 %   code mainly used from lab9
 
@@ -12,6 +12,10 @@ steps = t/deltaT;   % No. of steps for simulation
 delta = 2*pi/steps; % Small angle change
 epsilon = 0.1;      % Threshold value for manipulability/Damped Least Squares
 W = diag([1 1 1 0.1 0.1 0.1]);    % Weighting matrix for the velocity vector
+
+if ~exist('stepSize')
+    stepSize = 1;
+end
 
 % 1.2) Allocate array data
 m = zeros(steps,1);             % Array for Measure of Manipulability
@@ -88,7 +92,7 @@ end
 figure(1)
 plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
 % Robot.model.animate(qMatrix)
-MoveQMatrix(Robot,qMatrix,Objects);
+MoveQMatrix(Robot,qMatrix,Objects, stepSize);
 
 % for reporting and error checking
 % for i = 1:6
