@@ -25,7 +25,7 @@ clc
 % Mac run command
 % run /Users/jonathanwilde/git/Robotics/rvctools/startup_rvc.m
 % Windows run command
-run C:\Git\Robotics\rvctools\startup_rvc.m
+% run C:\Git\Robotics\rvctools\startup_rvc.m
 
 %%
 hold on
@@ -52,6 +52,8 @@ N6_2.model.animate(q);
 % N6_1.model.teach
 % 
 % pause(0.1);
+
+MoveWObjects(N6_1, transl(0.2,0.2,0.2),[]);
 
 end
 
