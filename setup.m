@@ -1,3 +1,18 @@
+%% Summary
+% This program was created for Assignment Task 2 of Robotics
+
+%% Authors
+% James Walsh
+% Jonathan Wilde - 12545606
+
+%% Reference List
+% =========================================================================
+% Collision checking
+%   Code obtained from tutorial 5, and modified for use in the assignment
+%
+% D6 Model
+%   
+
 function [] = setup()
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here\
