@@ -16,19 +16,7 @@ else
 end
 jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
 
-for trajStep = 1:size(jointTrajectory,1)
-    q = jointTrajectory(trajStep,:);
-    Robot_Arm.model.animate(q);
-    if isempty(Objects) == 0
-        newBase = Robot_Arm.model.fkine(q);
-    end
-    for i = 1:size(Objects,2)
-        Objects(i).model.base = newBase;
-        Objects(i).model.animate(0);
-    end
-    pause(0.01);
-end
-pause(0.01);
+MoveQMatrix(Robot_Arm,jointTrajectory,Objects);
 
 if size(GoalPose,2) == 6
     return
@@ -37,19 +25,7 @@ else
 end
 jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
 
-for trajStep = 1:size(jointTrajectory,1)
-    q = jointTrajectory(trajStep,:);
-    Robot_Arm.model.animate(q);
-    if isempty(Objects) == 0
-        newBase = Robot_Arm.model.fkine(q);
-    end
-    for i = 1:size(Objects,2)
-        Objects(i).model.base = newBase;
-        Objects(i).model.animate(0);
-    end
-    pause(0.01);
-end
-pause(0.01);
+MoveQMatrix(Robot_Arm,jointTrajectory,Objects);
 
 RobotEndPose = Robot_Arm.model.fkine(Robot_Arm.model.getpos);
 end
