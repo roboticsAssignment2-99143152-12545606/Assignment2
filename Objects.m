@@ -32,6 +32,7 @@ classdef Objects < handle % class to handle setting up of the static body
             
             for linkIndex = 0:1
                 [ faceData, vertexData, plyData{linkIndex + 1} ] = plyread(['Objects/PLY/',ModelName,'.ply'],'tri');
+                % Added cell2mat function for isCollision
                 self.model.faces{linkIndex + 1} = faceData;
                 self.model.points{linkIndex + 1} = vertexData;
             end

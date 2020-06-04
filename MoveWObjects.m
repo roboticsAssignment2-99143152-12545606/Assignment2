@@ -1,4 +1,4 @@
-function [RobotEndPose,Objects] = MoveWObjects(Robot_Arm,GoalPose,Objects)
+function [RobotEndPose,Objects] = MoveWObjects(Robot_Arm,GoalPose,Objects,Environment)
 %MoveWObjects Summary of this function goes here
 %   Takes in a robot arm, a pose and a matrix of objects and plots them
 %   Returning the robot endeffector pose and the objects poses in a same
@@ -16,7 +16,7 @@ else
 end
 jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
 
-MoveQMatrix(Robot_Arm,jointTrajectory,Objects);
+MoveQMatrix(Robot_Arm,jointTrajectory,Objects,Environment);
 
 if size(GoalPose,2) == 6
     return
@@ -25,7 +25,7 @@ else
 end
 jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
 
-MoveQMatrix(Robot_Arm,jointTrajectory,Objects);
+MoveQMatrix(Robot_Arm,jointTrajectory,Objects,Environment);
 
 RobotEndPose = Robot_Arm.model.fkine(Robot_Arm.model.getpos);
 end
