@@ -37,6 +37,9 @@ N6_2.model.animate(q);
 % N6_1.model.teach
 % 
 % pause(0.1);
+movementPour(N6_1, [], 10, [bottle], 50)
+
+'done'
 
 end
 

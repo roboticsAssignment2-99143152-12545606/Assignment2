@@ -1,4 +1,4 @@
-function [] = movementCircle(Robot, GoalPose, Time, Objects, axis, revolution)
+function [] = movementCircle(Robot, GoalPose, Time, Objects, axis, revolution, stepSize)
 %movementCircle this function will simulate stiring for the robot
 %   code mainly used from lab9
 
@@ -15,6 +15,10 @@ W = diag([1 1 1 0 0 0.8]);    % Weighting matrix for the velocity vector
 
 if ~exist('revolution')
     revolution = 1;
+end
+
+if ~exist('stepSize')
+    stepSize = 1;
 end
 
 % 1.2) Allocate array data
@@ -149,7 +153,7 @@ plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
 if abs(axis) > 1
     qMatrix(:,6) = -s/3;
 end
-MoveQMatrix(Robot,qMatrix,Objects);
+MoveQMatrix(Robot,qMatrix,Objects,stepSize);
 
 % for reporting and error checking
 % for i = 1:6
