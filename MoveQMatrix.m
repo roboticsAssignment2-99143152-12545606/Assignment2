@@ -8,6 +8,9 @@ end
 
 for qStep = 1:stepsize:size(qMatrix,1)
     q = qMatrix(qStep,:);
+    
+    %col check
+    
     Robot_Arm.model.animate(q);
     if isempty(Objects) == 0
         newBase = Robot_Arm.model.fkine(q);
