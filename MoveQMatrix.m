@@ -1,14 +1,14 @@
-function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects)
+function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects,colCheck)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
 for qStep = 1:size(qMatrix,1)
     q = qMatrix(qStep,:);
     
-%     for i = 1:size(Objects)
-%         colResult = IsCollision(Robot_Arm,qMatrix,Objects(i).faces,...
-%             Objects(i).points,Objects(i).faceNormals,'1');
-%     end
+    for i = 1:size(colCheck)
+        colResult = IsCollision(Robot_Arm,qMatrix,colCheck(i).model.faces,...
+            colCheck(i).model.points,colCheck(i).model.faceNormals,'1');
+    end
     
 %     if colResult == true
 %         disp('Collision detected');

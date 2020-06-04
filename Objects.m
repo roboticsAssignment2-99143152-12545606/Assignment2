@@ -35,12 +35,13 @@ classdef Objects < handle % class to handle setting up of the static body
                 self.model.points{linkIndex + 1} = vertexData;
             end
             
-            self.model.faceNormals = zeros(size(faceData,1),3);
+            % Added to generate the faceNormals for each link
+            self.model.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
             for faceIndex = 1:size(faceData,1)
                 v1 = vertexData(faceData(faceIndex,1)',:);
                 v2 = vertexData(faceData(faceIndex,2)',:);
                 v3 = vertexData(faceData(faceIndex,3)',:);
-                self.model.faceNormals(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+                self.model.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
             end
             
             L1 = Link('alpha',0,'a',0,'d',0,'offset',0);
