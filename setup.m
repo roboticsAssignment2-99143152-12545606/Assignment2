@@ -52,6 +52,9 @@ N6_2.model.animate(q);
 N6_1.model.teach
 % 
 % pause(0.1);
+movementPour(N6_1, [], 10, [bottle], 50)
+
+'done'
 
 %MoveQMatrix(N6_1, q, [], [van]);
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);

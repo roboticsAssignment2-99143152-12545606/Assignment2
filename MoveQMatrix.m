@@ -1,8 +1,12 @@
-function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects,Environment)
+function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects,Environment,stepsize)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
-for qStep = 1:size(qMatrix,1)
+if ~exist('stepsize')
+    stepsize = 1;
+end
+
+for qStep = 1:stepsize:size(qMatrix,1)
     q = qMatrix(qStep,:);
     
     for i = 1:size(Environment,2)
