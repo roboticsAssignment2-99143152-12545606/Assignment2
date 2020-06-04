@@ -38,6 +38,7 @@ classdef Objects < handle % class to handle setting up of the static body
             end
             
             % Added to generate the faceNormals for each link
+            % - Taken from the tutorial files (RectangularPrism)
             self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
             for faceIndex = 1:size(faceData,1)
                 v1 = vertexData(faceData(faceIndex,1)',:);

@@ -1,5 +1,5 @@
 function result = IsCollision(robot,qMatrix,faces,vertex,faceNormals,returnOnceFound)
-
+%% Before beginning we must convert cells to matrix for compatibility with the tutorial code.
 faces = cell2mat(faces(1));
 vertex = cell2mat(vertex(1));
 faceNormals = cell2mat(faceNormals(2));

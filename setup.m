@@ -15,7 +15,7 @@
 
 function [] = setup()
 %UNTITLED Summary of this function goes here
-%   Detailed explanation goes here\
+%   Detailed explanation goes here
 
 %% init
 close all
