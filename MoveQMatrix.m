@@ -5,9 +5,9 @@ function [] = MoveQMatrix(Robot_Arm,qMatrix,Objects,colCheck)
 for qStep = 1:size(qMatrix,1)
     q = qMatrix(qStep,:);
     
-    for i = 1:size(colCheck)
+    for i = 1:size(colCheck,2)
         colResult = IsCollision(Robot_Arm,qMatrix,colCheck(i).model.faces,...
-            colCheck(i).model.points,colCheck(i).model.faceNormals,'1');
+            colCheck(i).model.points,colCheck(i).faceNormals,'1');
     end
     
 %     if colResult == true

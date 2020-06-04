@@ -6,7 +6,7 @@ result = false;
 
 for qIndex = 1:size(qMatrix,1)
     % Get the transform of every joint (i.e. start and end of every link)
-    tr = GetLinkPoses(qMatrix(qIndex,:), robot);
+    tr = GetLinkPoses(qMatrix(qIndex,:), robot.model);
 
     % Go through each link and also each triangle face
     for i = 1 : size(tr,3)-1    
