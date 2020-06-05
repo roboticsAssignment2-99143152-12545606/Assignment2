@@ -9,18 +9,13 @@ end
 
 for qStep = 1:stepsize:size(qMatrix,1)
     q = qMatrix(qStep,:);
-    % First assign to true, so it enters the checking loop for this
-    % iteration of qMatrix
-    colResult = true;
-    % Loop here
-    while colResult == true
-        for i = 1:size(Environment,2)
-            colResult = IsCollision(Robot_Arm.model,qMatrix,Environment(i).model.faces,...
-                Environment(i).model.points,Environment(i).faceNormals,'1');
-            % Return as soon as a collision is detected
-            if colResult == true
-                return
-            end
+    
+    for i = 1:size(Environment,2)
+        colResult = IsCollision(Robot_Arm.model,qMatrix,Environment(i).model.faces,...
+            Environment(i).model.points,Environment(i).faceNormals,'1');
+        
+        if colResult == true
+            disp('COLLISION')
         end
     end
     
