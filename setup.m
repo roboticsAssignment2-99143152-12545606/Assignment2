@@ -2,7 +2,7 @@
 % This program was created for Assignment Task 2 of Robotics
 
 %% Authors
-% James Walsh
+% James Walsh - 
 % Jonathan Wilde - 12545606
 
 %% Reference List
@@ -36,7 +36,7 @@ hold on
 % floorOffset = -0.8905/2; %measured from bounding box
 % workSize = 10;N6
 % workspace = [-workSize workSize -workSize workSize (2*0) workSize];
-workspace = [-3 3 -5 5 0 5]
+workspace = [-3 3 -5 5 0 5];
 
 % setting up objects
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
@@ -51,10 +51,9 @@ N6_1 = D6Model('N6_1',workspace, transl(0,-0.5,0.650));
 N6_2 = D6Model('N6_2',workspace, transl(0,-2,0.650));
 
 % Adjust view
-view(300,20)
+view(300,20);
 
 % N6_1.model.teach();
-q = deg2rad([90,90,90,0,0,0])
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 N6_1.model.teach
