@@ -55,7 +55,7 @@ wildT = Objects('WildTurkey','2',workspace, transl(0.75,-1.85,1.87), -pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.75,-1.65,1.87), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-1.1,-1,1.55), -pi/2);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
-rick = Objects('Rick', '6', workspace, transl(0,0,0), 0);
+rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
 
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(0,-0.5,0.650));
