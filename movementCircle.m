@@ -53,15 +53,16 @@ end
 r = 0.06;
 % for on the floor xy circles
 if abs(axis) == 1
+    r = 0.01;
     xs = r * cos(s) + cords2(1);                % Trapezoidal trajectory scalar
     ys = r * sin(s) + cords2(2);                % Trapezoidal trajectory scalar
     % xs = r * cos(s);                % Trapezoidal trajectory scalar
     % ys = r * sin(s);                % Trapezoidal trajectory scalar
     zs = lspb(cords1(3),cords1(3),steps);                % Trapezoidal trajectory scalar
     
-    rx = ones(1,100) .* 0;
-    px = ones(1,100) .* 0;
-    yx = ones(1,100) .* -1;
+    rx = ones(1,steps) .* 0;
+    px = ones(1,steps) .* 0;
+    yx = ones(1,steps) .* -1;
     
     W = diag([1 1 1 0 0 0.8]);    % Weighting matrix for the velocity vector
 end
