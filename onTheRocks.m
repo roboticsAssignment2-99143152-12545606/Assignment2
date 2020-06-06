@@ -4,10 +4,10 @@ function [] = onTheRocks(robots,objects,environment)
 
 robots(1)
 
-pourPose = transl(-0.8,-1.8,1.5);
+pourPose = transl(-0.5,-1.8,1.5);
 
 MoveWObjects(robots(1), objects(1).getPose(), [], []);
-MoveWObjects(robots(1), pourPose, [objects(1)], []);
+MoveWObjects(robots(1), pourPose * troty(pi/2), [objects(1)], []);
 
 [qMatrix, steps] = movementPour(robots(1), [], 2, objects,[], 50)
 MoveQMatrix(robots(1), qMatrix, objects(1), [], 1);
