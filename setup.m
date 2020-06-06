@@ -55,7 +55,7 @@ N6_2.model.teach
 %
 % pause(0.1);
 % movementPour(N6_1, [], 10, [bottle], 50)
-%onTheRocks([N6_1, N6_2],[wildT],van);
+onTheRocks([N6_1, N6_2],[wildT],van);
 'done'
 
 %MoveQMatrix(N6_1, q, [], [van]);
