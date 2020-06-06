@@ -11,7 +11,7 @@
 %   Code obtained from tutorial 5, and modified for use in the assignment
 %
 % D6 Model
-%   
+%
 
 function [] = setup()
 %UNTITLED Summary of this function goes here
@@ -34,30 +34,31 @@ hold on
 % workspace = [-workSize workSize -workSize workSize (2*0) workSize];
 workspace = [-3 3 -5 5 0 5]
 
-% setting up objects
+% setting up environment
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
+eStop1 = Objects('E-Stop', '5', workspace, transl(-1.15,1,1.4), pi/2);
+
+% setting up objects
 wildT = Objects('WildTurkey','2',workspace, transl(0.6,-1.85,1.75), -pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.6,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-1,-1,1.45), -pi/2);
-eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
 
 % setting up  models
-N6_1 = D6Model('N6_1',workspace, transl(-0.05,-0.5,0.650));
-N6_2 = D6Model('N6_2',workspace, transl(-0.05,-2,0.600));
+N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.650));
+N6_2 = D6Model('N6_2',workspace, transl(-0.05,-2.4,0.650));
 
 % N6_1.model.teach();
 q = deg2rad([90,90,90,0,0,0])
 N6_1.model.animate(q);
 N6_2.model.animate(q);
-N6_1.model.teach
-% 
+% N6_1.model.teach
+%
 % pause(0.1);
-movementPour(N6_1, [], 10, [bottle], 50)
-
+% movementPour(N6_1, [], 10, [bottle], 50)
+onTheRocks([N6_1, N6_2],[wildT],van);
 'done'
 
 %MoveQMatrix(N6_1, q, [], [van]);
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);
 
 end
-

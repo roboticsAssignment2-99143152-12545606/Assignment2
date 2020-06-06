@@ -26,6 +26,10 @@ classdef Objects < handle % class to handle setting up of the static body
             % init object as one link robot
             self.plotAndColour(workspace, ModelName, ModelNum, location);
         end
+        
+        function [pose] = getPose(self)
+            pose = self.model.fkine(self.model.getpos);
+        end
                
         function plotAndColour(self, workspace, ModelName, ModelNum, location)
 
