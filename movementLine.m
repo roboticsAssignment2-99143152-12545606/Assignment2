@@ -1,4 +1,4 @@
-function [qMatrix,steps] = movementLine(Robot, GoalPose, Time)
+function [qMatrix,steps] = movementLine(Robot, startQ, GoalPose, Time)
 %movementLine this function will simulate shaking for the robot
 %   code mainly used from lab9
 
@@ -28,7 +28,7 @@ angleError = zeros(3,steps);    % For plotting trajectory error
 
 % user james
 % get xyz from poses
-p1 = Robot.getPose
+p1 = Robot.model.fkine(startQ);
 p2 = GoalPose;
 
 %plot start
@@ -54,7 +54,7 @@ mat = [x',theta'];
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
 q0 = zeros(1,6);                                                            % Initial guess for joint angles
 % qMatrix(1,:) = Robot.model.ikcon(Robot.model.fkine(Robot.model.getpos),q0);                                            % Solve joint angles to achieve first waypoint
-qMatrix(1,:) = Robot.model.getpos;
+qMatrix(1,:) = startQ;
 % 1.4) Track the trajectory with RMRC
 for i = 1:steps-1
     T = Robot.model.fkine(qMatrix(i,:));                                           % Get forward transformation at current joint state

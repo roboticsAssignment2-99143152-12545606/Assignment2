@@ -3,7 +3,7 @@ function [qMatrix, steps] = movementPour(Robot, GoalPose, Time, Objects, environ
 %   code mainly used from lab9
 p1 = Robot.getPose;
 % movementCircle(Robot, GoalPose, Time, Objects)
-    [q, s] = movementCircle(Robot, p1, Time,3, 0.3)
+    [q, s] = movementCircle(Robot, p1, p1, Time,3, 0.3)
     if ~exist('qMatrix','var')
         qMatrix = q;        
     else
@@ -15,7 +15,7 @@ p1 = Robot.getPose;
         steps = steps + s;
     end    
     %     movementCircle(Robot, p1, Time/iterations, Objects, -3, 0.3);
-    [q, s] = movementLine(Robot, transl(p1(1,4),p1(2,4)+0.2,p1(3,4)+0.2), Time);
+    [q, s] = movementLine(Robot, qMatrix(end,:), transl(p1(1,4),p1(2,4)+0.2,p1(3,4)+0.2), Time);
     qMatrix = [qMatrix;q]
     steps = steps + s;
 % qMatrix = [qMatrix1;qMatrix2];
