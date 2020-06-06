@@ -38,7 +38,18 @@ hold on
 % workspace = [-workSize workSize -workSize workSize (2*0) workSize];
 workspace = [-3 3 -5 5 0 5];
 
-% setting up objects
+%% Setup joystick
+[JS_1, joy, joy_info] = JoystickClass();
+
+%% Loop here
+% while(1)
+%     
+%     [axes, buttons, povs] = JS_1.JoystickRead(joy);
+%     disp(buttons(1,2))
+%     
+% end
+
+%%  setting up objects
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 wildT = Objects('WildTurkey','2',workspace, transl(0.75,-1.85,1.87), -pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.75,-1.65,1.87), -pi/2);
@@ -54,6 +65,7 @@ N6_2 = D6Model('N6_2',workspace, transl(0,-2,0.650));
 view(300,20);
 
 % N6_1.model.teach();
+q = ([90,90,90,0,0,0]);
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 N6_1.model.teach

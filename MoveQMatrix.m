@@ -28,6 +28,7 @@ for qStep = 1:stepsize:size(qMatrix,1)
         Objects(i).model.animate(0);
     end
     pause(0.01);
+
 end
 
 end
