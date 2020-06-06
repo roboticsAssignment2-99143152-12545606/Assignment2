@@ -1,4 +1,4 @@
-function [] = movementLine(Robot, GoalPose, Time, Objects, environment,stepSize)
+function [qMatrix,steps] = movementLine(Robot, GoalPose, Time)
 %movementLine this function will simulate shaking for the robot
 %   code mainly used from lab9
 
@@ -92,7 +92,7 @@ end
 figure(1)
 plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
 % Robot.model.animate(qMatrix)
-MoveQMatrix(Robot,qMatrix,Objects, environment,stepSize);
+% MoveQMatrix(Robot,qMatrix,Objects, environment,stepSize);
 
 % for reporting and error checking
 % for i = 1:6

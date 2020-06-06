@@ -8,7 +8,10 @@ pourPose = transl(-0.8,-1.8,1.5);
 
 MoveWObjects(robots(1), objects(1).getPose(), [], []);
 MoveWObjects(robots(1), pourPose, [objects(1)], []);
-movementPour(robots(1), [], 10, objects,[], 50)
+
+[qMatrix, steps] = movementPour(robots(1), [], 2, objects,[], 50)
+MoveQMatrix(robots(1), qMatrix, objects(1), [], 1);
+movementShake(robots(1), pourPose * transl(0,0,0.1), 10)
 
 end
 

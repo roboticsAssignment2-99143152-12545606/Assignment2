@@ -1,4 +1,4 @@
-function [] = movementCircle(Robot, GoalPose, Time, Objects, environment, axis, revolution, stepSize)
+function [qMatrix,steps] = movementCircle(Robot, GoalPose, Time, axis, revolution)
 %movementCircle this function will simulate stiring for the robot
 %   code mainly used from lab9
 
@@ -153,7 +153,7 @@ plot3(x(1,:),x(2,:),x(3,:),'k.','LineWidth',1)
 if abs(axis) > 1
     qMatrix(:,6) = -s/3;
 end
-MoveQMatrix(Robot,qMatrix,Objects,environment,stepSize);
+% MoveQMatrix(Robot,qMatrix,Objects,environment,stepSize);
 
 % for reporting and error checking
 % for i = 1:6
