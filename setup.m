@@ -41,7 +41,9 @@ eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
 % setting up objects
 wildT = Objects('WildTurkey','2',workspace, transl(0.6,-1.85,1.75), -pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.6,-1.65,1.75), -pi/2);
-glass = Objects('Glass', '4', workspace, transl(-0.6,-1.75,1.45), -pi/2);
+glass = Objects('Glass', '4', workspace, transl(-0.6,-1.75,1.50), -pi/2);
+spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
+spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
 
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.605 + 0.4));
