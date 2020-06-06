@@ -1,4 +1,4 @@
-function [qMatrix,steps] = movementCircle(Robot, GoalPose, Time, axis, revolution)
+function [qMatrix,steps] = movementCircle(Robot, startPose, GoalPose, Time, axis, revolution)
 %movementCircle this function will simulate stiring for the robot
 %   code mainly used from lab9
 
@@ -32,7 +32,7 @@ angleError = zeros(3,steps);    % For plotting trajectory error
 
 % user james
 % get xyz from poses
-p1 = Robot.getPose;
+p1 = startPose;
 p2 = GoalPose;
 
 %plot start
