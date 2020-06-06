@@ -18,14 +18,14 @@ jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
 
 MoveQMatrix(Robot_Arm,jointTrajectory,Objects,Environment);
 
-if size(GoalPose,2) == 6
-    return
-else
-    goalQ = Robot_Arm.model.ikcon(GoalPose * trotx(pi),Robot_Arm.model.getpos);
-end
-jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
-
-MoveQMatrix(Robot_Arm,jointTrajectory,Objects,Environment);
+% if size(GoalPose,2) == 6
+%     return
+% else
+%     goalQ = Robot_Arm.model.ikcon(GoalPose * trotx(pi),Robot_Arm.model.getpos);
+% end
+% jointTrajectory = jtraj(Robot_Arm.model.getpos(), goalQ,30);
+% 
+% MoveQMatrix(Robot_Arm,jointTrajectory,Objects,Environment);
 
 RobotEndPose = Robot_Arm.model.fkine(Robot_Arm.model.getpos);
 end
