@@ -11,6 +11,12 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         Max_Reach;
         Max_Vol;
         robotFunctions;
+        % Joystick variables
+        joyObj;
+        joy;
+        axes;
+        buttons;
+        povs;
     end
     
     methods
@@ -209,6 +215,23 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                     t = 0;
                     return
                 end
+            end
+        end
+        
+        %% Joystick functionality (Per Robot Arm)
+        function setJoy(self, joyObj, joy)
+            self.joyObj = joyObj;
+            self.joy = joy;
+        end
+        
+        function [value] = checkJoy(self)
+            [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
+            % buttons (1,2) corresponds to RED B button on LOGITECH
+            % controller
+            if self.buttons(1,2) == 0
+                value = 0;
+            else
+                value = 1;
             end
         end
     end

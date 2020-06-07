@@ -1,17 +1,18 @@
 function [] = onTheRocks(robots,objects,environment)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-pourPose = objects(2).getPose();
 
-MoveWObjects(robots(2), objects(1).getPose(), [], []);
-% MoveWObjects(robots(2), pourPose * troty(pi/2), [objects(1)], []);
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, pourPose ,2);
-MoveQMatrix(robots(2), qMatrix, objects(1), [], 1);
+robots(1)
 
-[qMatrix, steps] = movementPour(robots(2), [], 2, objects,[], 50)
-MoveQMatrix(robots(2), qMatrix, objects(1), [], 1);
-[qMatrix, steps] = movementShake(robots(2), pourPose * transl(0,0,0.05), 5)
-MoveQMatrix(robots(2), qMatrix, objects(1), [], 10);
+pourPose = transl(-0.8,-1.8,1.5);
+
+MoveWObjects(robots(1), objects(1).getPose(), [], []);
+MoveWObjects(robots(1), pourPose, [objects(1)], []);
+
+[qMatrix, steps] = movementPour(robots(1), [], 2, objects,[], 50)
+MoveQMatrix(robots(1), qMatrix, objects(1), [], 1);
+[qMatrix, steps] = movementShake(robots(1), pourPose * transl(0,0,0.1), 5)
+MoveQMatrix(robots(1), qMatrix, objects(1), [], 50);
 
 end
 
