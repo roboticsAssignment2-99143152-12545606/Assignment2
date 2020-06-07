@@ -10,13 +10,13 @@ for qStep = 1:stepsize:size(qMatrix,1)
     q = qMatrix(qStep,:);
     colResult = false;
     
-    estop = Robot_Arm.checkJoy();
-    if estop == 0
-        % Do nothing and continue - No estop present
-    else
-        disp('ESTOP DETECTED - HALTING ALL ACTIONS')
-        return
-    end
+%     estop = Robot_Arm.checkJoy();
+%     if estop == 0
+%         % Do nothing and continue - No estop present
+%     else
+%         disp('ESTOP DETECTED - HALTING ALL ACTIONS')
+%         return
+%     end
     
     for i = 1:size(Environment,2)
         colResult = IsCollision(Robot_Arm.model,qMatrix,Environment(i).model.faces,...
