@@ -39,16 +39,16 @@ classdef Objects < handle % class to handle setting up of the static body
                 % Added cell2mat function for isCollision
                 self.model.faces{linkIndex + 1} = faceData;
                 self.model.points{linkIndex + 1} = vertexData;
-            end
-            
-            % Added to generate the faceNormals for each link
-            % - Taken from the tutorial files (RectangularPrism)
-            self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
-            for faceIndex = 1:size(faceData,1)
-                v1 = vertexData(faceData(faceIndex,1)',:);
-                v2 = vertexData(faceData(faceIndex,2)',:);
-                v3 = vertexData(faceData(faceIndex,3)',:);
-                self.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+                
+                % Added to generate the faceNormals for each link
+                % - Taken from the tutorial files (RectangularPrism)
+                self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
+                for faceIndex = 1:size(faceData,1)
+                    v1 = vertexData(faceData(faceIndex,1)',:);
+                    v2 = vertexData(faceData(faceIndex,2)',:);
+                    v3 = vertexData(faceData(faceIndex,3)',:);
+                    self.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+                end
             end
             
             L1 = Link('alpha',0,'a',0,'d',0,'offset',0);
