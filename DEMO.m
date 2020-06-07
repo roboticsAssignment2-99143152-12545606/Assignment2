@@ -27,6 +27,17 @@ clc
 % Windows run command
 % run C:\Git\Robotics\rvctools\startup_rvc.m
 
+%% Setup joystick
+[JS_1, joy, joy_info] = JoystickClass();
+
+%% Loop here
+while(1)
+    
+    [axes, buttons, povs] = JS_1.JoystickRead(joy);
+    disp(buttons(1,2))
+    
+end
+
 %%
 hold on
 % floorOffset = -0.8905/2; %measured from bounding box
