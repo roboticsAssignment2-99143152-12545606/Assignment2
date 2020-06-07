@@ -54,25 +54,25 @@ N6_2.model.animate(q);
 
 %% this section does shaking
 
-% MoveWObjects(N6_1, glass.getPose() * transl(0,0.5,0.2) * troty(pi/2), [],[]);
-% P = N6_1.getPose;
-% P = P(1:3,4)';
-% [qMatrix, steps] = movementShake(N6_1, transl(P) * transl(0,0,0.25), 1, [])
-% s = steps;
-% qMatrix(1:end,6) = ones(s,1) .* deg2rad(90);
-% MoveQMatrix(N6_1, qMatrix, [glass], [], 10);
-% 'done'
-% return
+MoveWObjects(N6_1, glass.getPose() * transl(0,0.5,0.2) * troty(pi/2), [],[]);
+P = N6_1.getPose;
+P = P(1:3,4)';
+[qMatrix, steps] = movementShake(N6_1, transl(P) * transl(0,0,0.25), 1, [])
+s = steps;
+qMatrix(1:end,6) = ones(s,1) .* deg2rad(90);
+MoveQMatrix(N6_1, qMatrix, [glass], [], 10);
+'done'
+return
 
 %% this section does stiring
 
-% MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[]);
-% 
-% [qMatrix, steps] = movementStir(N6_1, [], 10, [])
-% 
-% MoveQMatrix(N6_1, qMatrix, [], [], 10);
-% 'done'
-% return
+MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[]);
+
+[qMatrix, steps] = movementStir(N6_1, [], 10, [])
+
+MoveQMatrix(N6_1, qMatrix, [], [], 10);
+'done'
+return
 
 %% this section do pouring 
 MoveWObjects(N6_1, glass.getPose() * transl(0,0,0.02), [],[]);
