@@ -87,7 +87,7 @@ MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[shakerTop]);
 
 [qMatrix, steps] = movementStir(N6_1, [], 10, [])
 
-MoveQMatrix(N6_1, qMatrix, [], [], 10);
+MoveQMatrix(N6_1, qMatrix, [], [shakerTop], 10);
 'done'
 return
 
