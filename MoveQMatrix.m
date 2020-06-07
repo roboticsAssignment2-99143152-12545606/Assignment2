@@ -24,7 +24,7 @@ for qStep = 1:stepsize:size(qMatrix,1)
     end
     
     if colResult == true
-        disp('Collision detected');
+        disp('Collision detected')
     else
         Robot_Arm.model.animate(q);
         if isempty(Objects) == 0

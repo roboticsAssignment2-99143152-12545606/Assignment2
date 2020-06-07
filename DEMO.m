@@ -54,6 +54,8 @@ wildT = Objects('WildTurkey','2',workspace, transl(0.6,-1.85,1.75), -pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.6,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-0.5,-2,1.45), -pi/2);
 shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+% Enable this shaker top for collision testing
+shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
 
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.605));
@@ -81,7 +83,7 @@ return
 
 %% this section does stiring
 
-MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[]);
+MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[shakerTop]);
 
 [qMatrix, steps] = movementStir(N6_1, [], 10, [])
 
