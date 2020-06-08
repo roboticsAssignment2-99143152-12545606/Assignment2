@@ -48,6 +48,15 @@ glassBlock = Objects('GlassBlock', '6', workspace, transl(-2,0,0), 0);
 
 environmentObjects = [van, eStop1, glassBlock];
 
+% Set up light curtain
+lightCurtain.X = [-0.95, 0.8];
+lightCurtain.Y = [-2.9, -2.9];
+lightCurtain.Z = [2.3, 2.3];
+
+for lineIt = lightCurtain.Z(1):-0.1:0.5
+    plot3(lightCurtain.X,lightCurtain.Y,[lineIt, lineIt],'--r','LineWidth',0.1);
+end
+
 %  setting up objects
 ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
 wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
@@ -97,6 +106,11 @@ stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
 %MoveQMatrix(N6_1, q, [], [van]);
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);
+
+%% this section to check light curtain
+Square = Objects('Square', '1', workspace, transl([0,-4,1.5]), 0);
+
+testLightCurtain(Square, lightCurtain);
 
 end
 
