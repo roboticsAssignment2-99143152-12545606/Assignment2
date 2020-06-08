@@ -27,7 +27,7 @@ clc
 % Windows run command
 % run C:\Git\Robotics\rvctools\startup_rvc.m
 
-%% Setup joystick
+%% Setup joystick as ESTOP
 [JS_1, joy, joy_info, NOJOY] = JoystickClass();
 
 if NOJOY == true
@@ -35,14 +35,6 @@ if NOJOY == true
 else
     disp('Joystick initialised')
 end
-
-%% Loop here
-% while(1)
-%     
-%     [axes, buttons, povs] = JS_1.JoystickRead(joy);
-%     disp(buttons(1,2))
-%     
-% end
 
 %%
 hold on
@@ -53,15 +45,17 @@ workspace = [-3 3 -5 5 0 5]
 
 % setting up environment
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
-eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
+eStop1 = Objects('E-Stop', '2', workspace, transl(-1,1,1.4), pi/2);
 
 % setting up objects
-wildT = Objects('WildTurkey','2',workspace, transl(0.6,-1.85,1.75), -pi/2);
-smirn = Objects('Smirnoff', '3', workspace, transl(0.6,-1.65,1.75), -pi/2);
-glass = Objects('Glass', '4', workspace, transl(-0.5,-2,1.45), -pi/2);
-shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+wildT = Objects('WildTurkey','3',workspace, transl(0.6,-1.85,1.75), -pi/2);
+smirn = Objects('Smirnoff', '4', workspace, transl(0.6,-1.65,1.75), -pi/2);
+soda = Objects('Soda', '5', workspace, transl(0.6,-2.05,1.80), -pi/2);
+bulmers = Objects('Bulmers', '6', workspace, transl(0.6,-2.30,1.84), -pi/2);
+glass = Objects('Glass', '7', workspace, transl(-0.5,-2,1.45), -pi/2);
+shaker = Objects('ShakerAssy', '8', workspace, transl(-0.5,-1.6,1.45), -pi/2);
 % Enable this shaker top for collision testing
-shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
+shakerTop = Objects('Shaker', '9', workspace, transl(-0.5,-2,1.55), -pi/2);
 
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.605));
