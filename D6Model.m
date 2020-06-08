@@ -14,6 +14,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         % Joystick variables
         joyObj;
         joy;
+        NOJOY;
         axes;
         buttons;
         povs;
@@ -219,9 +220,10 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         end
         
         %% Joystick functionality (Per Robot Arm)
-        function setJoy(self, joyObj, joy)
+        function setJoy(self, joyObj, joy, NOJOY)
             self.joyObj = joyObj;
             self.joy = joy;
+            self.NOJOY = NOJOY;
         end
         
         function [value] = checkJoy(self)

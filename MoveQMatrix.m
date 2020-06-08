@@ -10,12 +10,19 @@ for qStep = 1:stepsize:size(qMatrix,1)
     q = qMatrix(qStep,:);
     colResult = false;
     
-    estop = Robot_Arm.checkJoy();
-    if estop == 0
-        % Do nothing and continue - No estop present
+    % Check joy, if 0 joystick is not initialised
+    if Robot_Arm.NOJOY == true
+        % Do nothing and skip the ESTOP check
     else
-        disp('ESTOP DETECTED - HALTING ALL ACTIONS')
-        return
+        estop = Robot_Arm.checkJoy();
+        
+        % This checks for ESTOP
+        if estop == 0
+            % Do nothing and continue - No estop present
+        else
+            disp('ESTOP DETECTED - HALTING ALL ACTIONS')
+            return
+        end
     end
     
     for i = 1:size(Environment,2)
