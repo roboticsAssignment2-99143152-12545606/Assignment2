@@ -68,7 +68,7 @@ N6_1 = D6Model('N6_1',workspace, transl(-0.15,-1.6,0.605 + 0.4));
 N6_2 = D6Model('N6_2',workspace, transl(-0.15,-2.4,0.605 + 0.4));
 
 % N6_1.model.teach();
-q = ([90,90,90,0,0,0]);
+q = deg2rad([90,90,90,0,0,0]);
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 
