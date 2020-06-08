@@ -18,6 +18,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         axes;
         buttons;
         povs;
+        homeJoints;
     end
     
     methods
@@ -29,7 +30,8 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                 
                 self.workspace = [-2,2,-2,2,0,2];
                 self.getRobot("test");
-                self.currentJoints = zeros(1,6);
+                self.currentJoints = deg2rad([90,90,90,0,0,0]);
+                self.homeJoints = deg2rad([90,90,90,0,0,0]);
                 self.model.base = transl(0,0,0);
                 self.location = transl(0,0,0);
                 self.name = "test";
@@ -41,12 +43,17 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                 self.workspace = workspace;
                 self.getRobot(name);
                 self.currentJoints = zeros(1,6);
+                self.homeJoints = deg2rad([90,90,90,0,0,0]);
                 self.model.base = location;
                 self.location = location;
                 self.name = name;
             
                 self.PlotAndColour();
             end
+        end
+        
+        function home(self)
+            self.model.animate(self.model.homeJoints);
         end
         
         function [pose] = getPose(self)
