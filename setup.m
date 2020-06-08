@@ -44,9 +44,9 @@ workspace = [-3 3 -5 5 0 5];
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
-rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
+glassBlock = Objects('GlassBlock', '6', workspace, transl(-2,0,0), 0);
 
-environmentObjects = [van, eStop1, rick];
+environmentObjects = [van, eStop1, glassBlock];
 
 %  setting up objects
 ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
@@ -77,6 +77,9 @@ q = deg2rad([90,90,90,0,0,0]);
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 
+% Square.model.base = Square.model.base * transl([0, 0.1, 0]);
+% Square.model.animate(0);
+
 % N6_2.model.teach
 %
 % pause(0.1);
@@ -84,7 +87,11 @@ N6_2.model.animate(q);
 
 % onTheRocks([N6_2, N6_1],[wildT, glass],van);
 % shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
-% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[van, eStop1, rick])
+
+glassBlock.model.base = transl([-0.6,-1,1.50]);
+glassBlock.model.animate(0);
+%%
+stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
 'done'
 
