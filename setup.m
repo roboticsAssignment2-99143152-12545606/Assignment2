@@ -5,7 +5,19 @@
 % James Walsh - 
 % Jonathan Wilde - 12545606
 
-function [] = setup()
+%% Reference List
+% =========================================================================
+% Collision checking
+%   Code obtained from tutorial 5, and modified for use in the assignment
+%
+% N6 Model
+%   Model was taken from the Epson files.
+%   https://epson.com/For-Work/Robots/6-Axis/Flexion-N6-Compact-6-Axis-Robots---1000mm/p/RN6-A10SS73SS
+%
+% Rick Sanchez Model
+%   https://www.thingiverse.com/thing:2134321
+
+function [RobotArms,moveableObjects,environmentObjects] = setup()
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -33,12 +45,23 @@ workspace = [-3 3 -5 5 0 5];
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
 rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
-%%  setting up objects
+
+environmentObjects = [van, eStop1, rick];
+
+%  setting up objects
+ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
 wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.5,-1.65,1.75), -pi/2);
-glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), -pi/2);
+glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), pi);
 spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
-spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
+spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), pi);
+
+shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
+
+soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
+rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
+
+moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, ice];
 
 % Adjust view
 view(300,20);
@@ -47,8 +70,10 @@ view(300,20);
 N6_1 = D6Model('N6_1',workspace, transl(-0.15,-1.6,0.605 + 0.4));
 N6_2 = D6Model('N6_2',workspace, transl(-0.15,-2.4,0.605 + 0.4));
 
+RobotArms = [N6_1, N6_2];
+
 % N6_1.model.teach();
-q = ([90,90,90,0,0,0]);
+q = deg2rad([90,90,90,0,0,0]);
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 
@@ -57,7 +82,9 @@ N6_2.model.animate(q);
 % pause(0.1);
 % movementPour(N6_1, [], 10, [bottle], 50)
 
-onTheRocks([N6_2, N6_1],[wildT, glass],van);
+% onTheRocks([N6_2, N6_1],[wildT, glass],van);
+% shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
+% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[van, eStop1, rick])
 
 'done'
 

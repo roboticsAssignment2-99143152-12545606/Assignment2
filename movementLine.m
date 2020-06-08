@@ -1,4 +1,4 @@
-function [qMatrix,steps] = movementLine(Robot, startQ, GoalPose, Time)
+function [qMatrix,steps] = movementLine(Robot, startQ, GoalPose, Time, axiss)
 %movementLine this function will simulate shaking for the robot
 %   code mainly used from lab9
 
@@ -13,8 +13,8 @@ delta = 2*pi/steps; % Small angle change
 epsilon = 0.1;      % Threshold value for manipulability/Damped Least Squares
 W = diag([1 1 1 0.1 0.1 0.1]);    % Weighting matrix for the velocity vector
 
-if ~exist('stepSize')
-    stepSize = 1;
+if ~exist('axiss')
+    axiss = 1;
 end
 
 % 1.2) Allocate array data
@@ -46,9 +46,16 @@ for i=1:steps
     x(1,i) = xs(i); % Points in x
     x(2,i) = ys(i); % Points in y
     x(3,i) = zs(i); % Points in z
-    theta(1,i) = -90;                 % Roll angle
-    theta(2,i) = -90;            % Pitch angle
-    theta(3,i) = 90;                 % Yaw angle
+    if axiss == 1
+        theta(1,i) = -90;                 % Roll angle
+        theta(2,i) = -90;            % Pitch angle
+        theta(3,i) = 90;                 % Yaw angle
+    else
+        theta(1,i) = 0;                 % Roll angle
+        theta(2,i) = 0;            % Pitch angle
+        theta(3,i) = -1;                 % Yaw angle
+        W = diag([1 1 1 0 0 0.8]);
+    end
 end
 mat = [x',theta'];
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
