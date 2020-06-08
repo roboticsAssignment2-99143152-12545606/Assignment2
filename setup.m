@@ -62,7 +62,7 @@ wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.5,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), pi);
 spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
-spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
+spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), pi);
 
 shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 

@@ -87,5 +87,43 @@ MoveQMatrix(robots(1), qMatrix, objects(2), [], 1);
 qMatrix(1:steps,6) = lspb(qMatrix(1,6),deg2rad(200),steps);
 MoveQMatrix(robots(1), qMatrix, objects(2), [], 1);
 
+% come back to stir
+spoonPose = objects(5).getPose;
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, spoonPose * transl(0,0,0.25), 2, 2);
+MoveQMatrix(robots(2), qMatrix, [], [], 1);
+
+robotxyzpose = robots(2).getPose
+robotxyzpose = robotxyzpose(1:3,4)'
+[qMatrix, steps] = MoveWObjects(robots(2), transl(robotxyzpose(1),robotxyzpose(2),robotxyzpose(3)) * trotz(pi), [objects(2)], []);
+MoveQMatrix(robots(2), qMatrix, [], [], 5);
+
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, spoonPose, 2, 2);
+MoveQMatrix(robots(2), qMatrix, [], [], 1);
+
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, spoonPose * transl(0,0,0.25), 2, 2);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 1);
+
+glassPose = objects(4).getPose;
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, glassPose * transl(0,0,0.25), 2, 2);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 1);
+
+robotxyzpose = robots(2).getPose
+robotxyzpose = robotxyzpose(1:3,4)'
+[qMatrix, steps] = MoveWObjects(robots(2), transl(robotxyzpose(1),robotxyzpose(2),robotxyzpose(3)) * trotz(pi), [objects(2)], []);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 5);
+
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, glassPose * transl(0,0,0.1), 2, 2);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 1);
+
+[qMatrix, steps] = movementStir(robots(2), [], 4, []);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 4);
+
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, glassPose * transl(0,0,0.25), 2, 2);
+MoveQMatrix(robots(2), qMatrix, [objects(5)], [], 1);
+
+q = deg2rad([90,90,90,0,0,0])
+[qMatrix, steps] = MoveWObjects(robots(2), q, [objects(2)], []);
+MoveQMatrix(robots(2), qMatrix,[], [], 1);
+
 end
 

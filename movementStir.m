@@ -7,7 +7,7 @@ p1 = Robot.getPose;
 
 
 %     movementCircle(Robot, p1, Time, Objects, 1);
-[q, s] = movementCircle(Robot, p1, Time,1, 4)
+[q, s] = movementCircle(Robot, p1, Time,1, 6)
 
 
 end
