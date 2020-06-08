@@ -17,7 +17,7 @@
 % Rick Sanchez Model
 %   https://www.thingiverse.com/thing:2134321
 
-function [RobotArms,Objects,environmentObjects] = setup()
+function [RobotArms,moveableObjects,environmentObjects] = setup()
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -49,25 +49,25 @@ workspace = [-3 3 -5 5 0 5];
 %     
 % end
 
-%%  setting up environments
+%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
 rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
 
 environmentObjects = [van, eStop1, rick];
 
-%%  setting up objects
+%  setting up objects
 wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.5,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), -pi/2);
 spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
 spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
 
-shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+% shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
 % Enable this shaker top for collision testing
-shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
+shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-1,1.4), -pi/2);
 
-Objects = [wildT,smirn,glass,spoonGlass,spoon,shaker,shakerTop];
+moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop];
 
 % Adjust view
 view(300,20);
@@ -89,7 +89,7 @@ N6_2.model.animate(q);
 % movementPour(N6_1, [], 10, [bottle], 50)
 
 % onTheRocks([N6_2, N6_1],[wildT, glass],van);
-shakenNotstired([N6_2, N6_1],[smirn, shaker, shakerTop,glass],[van, eStop1, rick])
+shakenNotstired([N6_2, N6_1],[smirn,glass, shakerTop],[van, eStop1, rick])
 
 'done'
 
