@@ -15,7 +15,9 @@ for qStep = 1:stepsize:size(qMatrix,1)
     if Robot_Arm.NOJOY == true
         % Do nothing and skip the ESTOP check
     else
-        estop = Robot_Arm.checkJoy();
+        try estop = Robot_Arm.checkJoy();
+        catch estop = 0;
+        end
         
         % This checks for ESTOP
         if estop == 0
