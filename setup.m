@@ -57,17 +57,19 @@ rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
 environmentObjects = [van, eStop1, rick];
 
 %  setting up objects
+ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
 wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.5,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), pi);
 spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
 spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
 
-% shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
-% Enable this shaker top for collision testing
 shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 
-moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop];
+soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
+rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
+
+moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum];
 
 % Adjust view
 view(300,20);
@@ -89,7 +91,8 @@ N6_2.model.animate(q);
 % movementPour(N6_1, [], 10, [bottle], 50)
 
 % onTheRocks([N6_2, N6_1],[wildT, glass],van);
-shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
+% shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
+stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[van, eStop1, rick])
 
 'done'
 
