@@ -30,12 +30,16 @@ Reference:
 https://blog.robotiq.com/new-collaborative-robot-sawyer-from-rethink-robotics
 http://en.dh-robotics.com/ag-95/
 
-MISCELLANEOUS REFERENCES
+REFERENCES
 ----------------------------------
-These references are for the authors use only. A record of recent activity.
-
-Externally sourced SAWYER CAD
-https://grabcad.com/library/robot-marca-sawyer-1
-
-Forum Post (CAD)
-https://rethinkrobotics.interaforum.com/topic/110-sawyer-cad-model/
+% Collision checking
+%   Code obtained from tutorial 5, and modified for use in the assignment
+%
+% D6 Model
+%   https://epson.com/For-Work/Robots/6-Axis/Flexion-N6-Compact-6-Axis-Robots---1000mm/p/RN6-A10SS73SS
+%
+% Crazy Hand
+%   https://www.thingiverse.com/thing:1411042
+%
+% Rick Sanchez
+%   https://www.thingiverse.com/thing:2134321

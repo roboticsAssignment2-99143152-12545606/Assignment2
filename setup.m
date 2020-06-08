@@ -41,15 +41,7 @@ workspace = [-3 3 -5 5 0 5];
 %% Setup joystick
 [JS_1, joy, joy_info] = JoystickClass();
 
-%% Loop here
-% while(1)
-%     
-%     [axes, buttons, povs] = JS_1.JoystickRead(joy);
-%     disp(buttons(1,2))
-%     
-% end
-
-%  setting up environments
+%%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
 rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
