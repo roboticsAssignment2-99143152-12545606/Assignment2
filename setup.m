@@ -5,18 +5,6 @@
 % James Walsh - 
 % Jonathan Wilde - 12545606
 
-%% Reference List
-% =========================================================================
-% Collision checking
-%   Code obtained from tutorial 5, and modified for use in the assignment
-%
-% N6 Model
-%   Model was taken from the Epson files.
-%   https://epson.com/For-Work/Robots/6-Axis/Flexion-N6-Compact-6-Axis-Robots---1000mm/p/RN6-A10SS73SS
-%
-% Rick Sanchez Model
-%   https://www.thingiverse.com/thing:2134321
-
 function [] = setup()
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
@@ -40,14 +28,6 @@ workspace = [-3 3 -5 5 0 5];
 
 %% Setup joystick
 [JS_1, joy, joy_info] = JoystickClass();
-
-%% Loop here
-% while(1)
-%     
-%     [axes, buttons, povs] = JS_1.JoystickRead(joy);
-%     disp(buttons(1,2))
-%     
-% end
 
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
