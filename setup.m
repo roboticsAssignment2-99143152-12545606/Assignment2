@@ -108,7 +108,7 @@ stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);
 
 %% this section to check light curtain
-Square = Objects('Square', '1', workspace, transl([0,-4,1.5]), 0);
+Square = Objects('Square', '1', workspace, transl([-4,-4,1.5]), 0);
 
 testLightCurtain(Square, lightCurtain);
 

@@ -1,5 +1,8 @@
 function [] = testLightCurtain(IntShape, lightCurtain)
-
+% Set the initial starting point of the object
+IntShape.model.base = transl([0,-4,1.5]);
+IntShape.model.animate(0);
+    
 intersect = false;
 
 while (intersect == false)
