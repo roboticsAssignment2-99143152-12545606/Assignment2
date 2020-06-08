@@ -67,8 +67,10 @@ shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
 N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.605));
 N6_2 = D6Model('N6_2',workspace, transl(-0.05,-2.4,0.605));
 % Assign joystick to each robot
+
 N6_1.setJoy(JS_1, joy, NOJOY);
 N6_2.setJoy(JS_1, joy, NOJOY);
+
 
 % N6_1.model.teach();
 q = deg2rad([90,90,90,0,0,0])
