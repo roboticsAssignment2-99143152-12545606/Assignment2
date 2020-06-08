@@ -53,7 +53,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
         end
         
         function home(self)
-            self.model.animate(self.model.homeJoints);
+            self.model.animate(self.homeJoints);
         end
         
         function [pose] = getPose(self)
