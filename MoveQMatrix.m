@@ -31,7 +31,7 @@ for qStep = 1:stepsize:size(qMatrix,1)
             newBase = Robot_Arm.model.fkine(q);
         end
         for i = 1:size(Objects,2)
-            Objects(i).model.base = newBase * trotx(-Objects(i).rot);
+            Objects(i).model.base = newBase * trotx(Objects(i).rot);
             Objects(i).model.animate(0);
         end
         pause(0.01);

@@ -15,7 +15,7 @@ p1 = Robot.getPose;
         steps = steps + s;
     end    
     %     movementCircle(Robot, p1, Time/iterations, Objects, -3, 0.3);
-    [q, s] = movementLine(Robot, qMatrix(end,:), transl(p1(1,4),p1(2,4)+0.2,p1(3,4)+0.1), Time);
+    [q, s] = movementLine(Robot, qMatrix(end,:), transl(p1(1,4),p1(2,4)+0.2,p1(3,4)+0.05), Time);
     qMatrix = [qMatrix;q]
     steps = steps + s;
 % qMatrix = [qMatrix1;qMatrix2];
