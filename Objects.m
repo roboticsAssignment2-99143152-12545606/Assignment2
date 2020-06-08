@@ -33,21 +33,25 @@
             pose = self.model.fkine(self.model.getpos);
         end
 		
-		function [points,faces,faceNormals] = getPLYData()
-			Pose = getPose;
-			points = self.model.points + Pose(1:3,4)';
+		function [points,faces,faceNormals] = getPLYData(self)
+			Pose = self.getPose;
+			points = cell2mat(self.model.points) + Pose(1:3,4)';
 			self.points = points;
-			faces = self.model.faces;
+			faces = cell2mat(self.model.faces);
+            self.faces = faces;
 			% Added to generate the faceNormals for each link
             % - Taken from the tutorial files (RectangularPrism)
-            self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
-            for faceIndex = 1:size(faceData,1)
-                v1 = vertexData(faceData(faceIndex,1)',:);
-                v2 = vertexData(faceData(faceIndex,2)',:);
-                v3 = vertexData(faceData(faceIndex,3)',:);
-                self.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+%             self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
+            self.faceNormals{1} = zeros(size(faces,1),3);
+            for faceIndex = 1:size(faces,1)
+                v1 = points(faces(faceIndex,1)',:);
+                v2 = points(faces(faceIndex,2)',:);
+                v3 = points(faces(faceIndex,3)',:);
+%                 self.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+                self.faceNormals{1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
             end
-			faceNormals = self.faceNormals;
+			faceNormals = cell2mat(self.faceNormals);
+            faceNormals = faceNormals(:,1:3);
 		end
                
         function plotAndColour(self, workspace, ModelName, ModelNum, location)

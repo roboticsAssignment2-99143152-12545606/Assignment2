@@ -116,9 +116,7 @@ while (intersect == false)
     Square.model.base = Square.model.base * transl([0, 0.1, 0]);
     Square.model.animate(0);
     
-    objPoints = cell2mat(Square.model.points);
-    objFaces = cell2mat(Square.model.faces);
-    objNormals = cell2mat(Square.faceNormals);
+    [objPoints, objFaces, objNormals] = Square.getPLYData()
 
     % Go through each link and also each triangle face
     for i = 1 : 18
@@ -127,15 +125,10 @@ while (intersect == false)
             [intersectP,check] = LinePlaneIntersection(objNormals(faceIndex,:),vertOnPlane,...
                             [lightCurtain.X(1),lightCurtain.Y(1),(lightCurtain.Z(1)-(i/10))],[lightCurtain.X(2),lightCurtain.Y(2),(lightCurtain.Z(2)-(i/10))]);
     %         disp(check)
-%             if check == 1 && IsIntersectionPointInsideTriangle(intersectP,objPoints(objFaces(faceIndex,:)',:))
-            if check == 1
+            if check == 1 && IsIntersectionPointInsideTriangle(intersectP,objPoints(objFaces(faceIndex,:)',:))
                 disp('Intersection')
                 plot3(intersectP(1),intersectP(2),intersectP(3),'g*')
                 intersect = true;
-    %             result = true;
-    %             if returnOnceFound
-    %                 return
-    %             end
             end
         end
     end
