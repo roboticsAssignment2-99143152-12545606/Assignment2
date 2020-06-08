@@ -60,6 +60,10 @@ glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), -pi/2);
 spoonGlass = Objects('Spoon_Glass', '5', workspace, transl(-0.6,-2.6,1.50), 0);
 spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), 0);
 
+shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+% Enable this shaker top for collision testing
+shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
+
 % Adjust view
 view(300,20);
 
@@ -77,7 +81,7 @@ N6_2.model.animate(q);
 % pause(0.1);
 % movementPour(N6_1, [], 10, [bottle], 50)
 
-onTheRocks([N6_2, N6_1],[wildT, glass],van);
+% onTheRocks([N6_2, N6_1],[wildT, glass],van);
 
 'done'
 
