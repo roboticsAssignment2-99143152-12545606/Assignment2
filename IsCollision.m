@@ -1,8 +1,8 @@
 function result = IsCollision(robot,qMatrix,faces,vertex,faceNormals,returnOnceFound)
 %% Before beginning we must convert cells to matrix for compatibility with the tutorial code.
-faces = cell2mat(faces(1));
-vertex = cell2mat(vertex(1));
-faceNormals = cell2mat(faceNormals(2));
+% faces = cell2mat(faces(1));
+% vertex = cell2mat(vertex(1));
+% faceNormals = cell2mat(faceNormals(2));
 
 if nargin < 6
     returnOnceFound = true;
@@ -14,7 +14,7 @@ for qIndex = 1:size(qMatrix,1)
     tr = GetLinkPoses(qMatrix(qIndex,:), robot);
 
     % Go through each link and also each triangle face
-    for i = 1 : size(tr,3)-1    
+    for i = 1 : size(tr,3)-1
         for faceIndex = 1:size(faces,1)
             vertOnPlane = vertex(faces(faceIndex,1)',:);
             [intersectP,check] = LinePlaneIntersection(faceNormals(faceIndex,:),vertOnPlane,tr(1:3,4,i)',tr(1:3,4,i+1)'); 
@@ -25,6 +25,8 @@ for qIndex = 1:size(qMatrix,1)
                 % Removed - error control will be handled at the higher
                 % level (MoveQMatrix)
                 %display('Intersection');
+                disp('Intersection')
+                plot3(intersectP(1),intersectP(2),intersectP(3),'g*')
                 result = true;
                 if returnOnceFound
                     return

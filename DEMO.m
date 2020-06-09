@@ -5,14 +5,6 @@
 % James Walsh
 % Jonathan Wilde - 12545606
 
-%% Reference List
-% =========================================================================
-% Collision checking
-%   Code obtained from tutorial 5, and modified for use in the assignment
-%
-% D6 Model
-%
-
 function [] = DEMO()
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
@@ -27,16 +19,14 @@ clc
 % Windows run command
 % run C:\Git\Robotics\rvctools\startup_rvc.m
 
-%% Setup joystick
-% [JS_1, joy, joy_info] = JoystickClass();
+%% Setup joystick as ESTOP
+[JS_1, joy, joy_info, NOJOY] = JoystickClass();
 
-%% Loop here
-% while(1)
-%     
-%     [axes, buttons, povs] = JS_1.JoystickRead(joy);
-%     disp(buttons(1,2))
-%     
-% end
+if NOJOY == true
+    disp('Joystick has not been initialised')
+else
+    disp('Joystick initialised')
+end
 
 %%
 hold on
@@ -47,22 +37,35 @@ workspace = [-3 3 -5 5 0 5]
 
 % setting up environment
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
-eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
+eStop1 = Objects('E-Stop', '2', workspace, transl(-1,1,1.4), pi/2);
+
+% Set up light curtain
+lightCurtain.X = [-0.95, 0.8];
+lightCurtain.Y = [-2.9, -2.9];
+lightCurtain.Z = [2.3, 2.3];
+
+for lineIt = lightCurtain.Z(1):-0.1:0.5
+    plot3(lightCurtain.X,lightCurtain.Y,[lineIt, lineIt],'--r','LineWidth',0.1);
+end
 
 % setting up objects
-wildT = Objects('WildTurkey','2',workspace, transl(0.6,-1.85,1.75), -pi/2);
-smirn = Objects('Smirnoff', '3', workspace, transl(0.6,-1.65,1.75), -pi/2);
-glass = Objects('Glass', '4', workspace, transl(-0.5,-2,1.45), -pi/2);
-shaker = Objects('ShakerAssy', '6', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+wildT = Objects('WildTurkey','3',workspace, transl(0.6,-1.85,1.75), -pi/2);
+smirn = Objects('Smirnoff', '4', workspace, transl(0.6,-1.65,1.75), -pi/2);
+soda = Objects('Soda', '5', workspace, transl(0.6,-2.05,1.80), -pi/2);
+bulmers = Objects('Bulmers', '6', workspace, transl(0.6,-2.30,1.84), -pi/2);
+glass = Objects('Glass', '7', workspace, transl(-0.5,-2,1.45), -pi/2);
+shaker = Objects('ShakerAssy', '8', workspace, transl(-0.5,-1.6,1.45), -pi/2);
+
 % Enable this shaker top for collision testing
-shakerTop = Objects('Shaker', '7', workspace, transl(-0.5,-2,1.55), -pi/2);
+shakerTop = Objects('Shaker', '9', workspace, transl(-0.5,-2,1.55), -pi/2);
 
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.05,-1.6,0.605));
 N6_2 = D6Model('N6_2',workspace, transl(-0.05,-2.4,0.605));
+
 % Assign joystick to each robot
-% N6_1.setJoy(JS_1, joy);
-% N6_2.setJoy(JS_1, joy);
+N6_1.setJoy(JS_1, joy, NOJOY);
+N6_2.setJoy(JS_1, joy, NOJOY);
 
 % N6_1.model.teach();
 q = deg2rad([90,90,90,0,0,0])
@@ -87,7 +90,7 @@ MoveWObjects(N6_1, glass.getPose() * transl(0,0,-0.05), [],[shakerTop]);
 
 [qMatrix, steps] = movementStir(N6_1, [], 10, [])
 
-MoveQMatrix(N6_1, qMatrix, [], [], 10);
+MoveQMatrix(N6_1, qMatrix, [], [shakerTop], 10);
 'done'
 return
 
@@ -104,5 +107,30 @@ MoveQMatrix(N6_1, qMatrix, [smirn], [], 10);
 'done'
 return
 
+%% this section to check light curtain
+Square = Objects('Square', '1', workspace, transl([0,-4,1.5]), 0);
 
+intersect = false;
+
+while (intersect == false)
+    Square.model.base = Square.model.base * transl([0, 0.1, 0]);
+    Square.model.animate(0);
+    
+    [objPoints, objFaces, objNormals] = Square.getPLYData()
+
+    % Go through each link and also each triangle face
+    for i = 1 : 18
+        for faceIndex = 1:size(objFaces,1)
+            vertOnPlane = objPoints(objFaces(faceIndex,1)',:);
+            [intersectP,check] = LinePlaneIntersection(objNormals(faceIndex,:),vertOnPlane,...
+                            [lightCurtain.X(1),lightCurtain.Y(1),(lightCurtain.Z(1)-(i/10))],[lightCurtain.X(2),lightCurtain.Y(2),(lightCurtain.Z(2)-(i/10))]);
+    %         disp(check)
+            if check == 1 && IsIntersectionPointInsideTriangle(intersectP,objPoints(objFaces(faceIndex,:)',:))
+                disp('Intersection')
+                plot3(intersectP(1),intersectP(2),intersectP(3),'g*')
+                intersect = true;
+            end
+        end
+    end
+end
 end

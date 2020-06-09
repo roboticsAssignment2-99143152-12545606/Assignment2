@@ -1,4 +1,4 @@
-classdef Objects < handle % class to handle setting up of the static body
+ classdef Objects < handle % class to handle setting up of the static body
     properties
         model;
         plyData;
@@ -7,6 +7,16 @@ classdef Objects < handle % class to handle setting up of the static body
         rot;
         radi;
         faceNormals;
+		faces;
+		points;
+        % Joystick variables
+        joyObj;
+        joy;
+        NOJOY;
+        axes;
+        buttons;
+        povs;
+        homeJoints;
     end
     
     methods
@@ -30,6 +40,27 @@ classdef Objects < handle % class to handle setting up of the static body
         function [pose] = getPose(self)
             pose = self.model.fkine(self.model.getpos);
         end
+		
+		function [points,faces,faceNormals] = getPLYData(self)
+			Pose = self.getPose;
+			points = cell2mat(self.model.points) + Pose(1:3,4)';
+			self.points = points;
+			faces = cell2mat(self.model.faces);
+            self.faces = faces;
+			% Added to generate the faceNormals for each link
+            % - Taken from the tutorial files (RectangularPrism)
+%             self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
+            self.faceNormals{1} = zeros(size(faces,1),3);
+            for faceIndex = 1:size(faces,1)
+                v1 = points(faces(faceIndex,1)',:);
+                v2 = points(faces(faceIndex,2)',:);
+                v3 = points(faces(faceIndex,3)',:);
+%                 self.faceNormals{linkIndex + 1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+                self.faceNormals{1}(faceIndex,:) = unit(cross(v2-v1,v3-v1));
+            end
+			faceNormals = cell2mat(self.faceNormals);
+            faceNormals = faceNormals(:,1:3);
+		end
                
         function plotAndColour(self, workspace, ModelName, ModelNum, location)
 
@@ -40,7 +71,8 @@ classdef Objects < handle % class to handle setting up of the static body
                 self.model.faces{linkIndex + 1} = faceData;
                 self.model.points{linkIndex + 1} = vertexData;
             end
-            
+            self.faces = self.model.faces;
+			self.model.points = self.points;
             % Added to generate the faceNormals for each link
             % - Taken from the tutorial files (RectangularPrism)
             self.faceNormals{linkIndex + 1} = zeros(size(faceData,1),3);
@@ -75,7 +107,72 @@ classdef Objects < handle % class to handle setting up of the static body
                     disp(ME_1);
                     continue;
                 end
-            end    
+            end
+        end
+        
+        %% Joystick functionality (Per Robot Arm)
+        function setJoy(self, joyObj, joy, NOJOY)
+            self.joyObj = joyObj;
+            self.joy = joy;
+            self.NOJOY = NOJOY;
+        end
+        
+        function [value] = checkJoy(self)
+            [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
+            % buttons (1,2) corresponds to RED B button on LOGITECH
+            % controller
+            if self.buttons(1,2) == 0
+                value = 0;
+            else
+                value = 1;
+            end
+        end
+        
+        function [newModelBase] = joggingLoop(self, increments, debug)
+            % Each time this jogging function is run, it will obtain the
+            % end effector position, and apply a slight offset to it.
+            % 
+            % Run this in a while loop
+            %   Check stop > Run joggingLoop > Apply transform
+            [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
+            currentModelBase = self.model.base;
+            
+            % For each button state, apply a certain offset to the current
+            % end effector transform, and calculate the joint positions
+            % from that
+            
+            newModelBase = currentModelBase;
+            
+            if (self.axes(2) > 0.5)
+                newModelBase = currentModelBase * transl([-increments, 0, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(2) < -0.5)
+                newModelBase = currentModelBase * transl([increments, 0, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(1) > 0.5)
+                newModelBase = currentModelBase * transl([0, -increments, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(1) < -0.5)
+                newModelBase = currentModelBase * transl([0, increments, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            self.model.base = newModelBase;
+            self.model.animate(0);
         end
     end
-end
+ end
