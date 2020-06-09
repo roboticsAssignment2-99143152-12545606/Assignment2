@@ -1,8 +1,8 @@
 function result = IsCollision(robot,qMatrix,faces,vertex,faceNormals,returnOnceFound)
 %% Before beginning we must convert cells to matrix for compatibility with the tutorial code.
-faces = cell2mat(faces(1));
-vertex = cell2mat(vertex(1));
-faceNormals = cell2mat(faceNormals(2));
+% faces = cell2mat(faces(1));
+% vertex = cell2mat(vertex(1));
+% faceNormals = cell2mat(faceNormals(2));
 
 if nargin < 6
     returnOnceFound = true;
@@ -25,6 +25,8 @@ for qIndex = 1:size(qMatrix,1)
                 % Removed - error control will be handled at the higher
                 % level (MoveQMatrix)
                 %display('Intersection');
+                disp('Intersection')
+                plot3(intersectP(1),intersectP(2),intersectP(3),'g*')
                 result = true;
                 if returnOnceFound
                     return

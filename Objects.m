@@ -9,6 +9,14 @@
         faceNormals;
 		faces;
 		points;
+        % Joystick variables
+        joyObj;
+        joy;
+        NOJOY;
+        axes;
+        buttons;
+        povs;
+        homeJoints;
     end
     
     methods
@@ -99,7 +107,72 @@
                     disp(ME_1);
                     continue;
                 end
-            end    
+            end
+        end
+        
+        %% Joystick functionality (Per Robot Arm)
+        function setJoy(self, joyObj, joy, NOJOY)
+            self.joyObj = joyObj;
+            self.joy = joy;
+            self.NOJOY = NOJOY;
+        end
+        
+        function [value] = checkJoy(self)
+            [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
+            % buttons (1,2) corresponds to RED B button on LOGITECH
+            % controller
+            if self.buttons(1,2) == 0
+                value = 0;
+            else
+                value = 1;
+            end
+        end
+        
+        function [newModelBase] = joggingLoop(self, increments, debug)
+            % Each time this jogging function is run, it will obtain the
+            % end effector position, and apply a slight offset to it.
+            % 
+            % Run this in a while loop
+            %   Check stop > Run joggingLoop > Apply transform
+            [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
+            currentModelBase = self.model.base;
+            
+            % For each button state, apply a certain offset to the current
+            % end effector transform, and calculate the joint positions
+            % from that
+            
+            newModelBase = currentModelBase;
+            
+            if (self.axes(2) > 0.5)
+                newModelBase = currentModelBase * transl([-increments, 0, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(2) < -0.5)
+                newModelBase = currentModelBase * transl([increments, 0, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(1) > 0.5)
+                newModelBase = currentModelBase * transl([0, -increments, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            if (self.axes(1) < -0.5)
+                newModelBase = currentModelBase * transl([0, increments, 0]);
+                if debug == 1
+                    disp(newModelBase)
+                end
+            end
+            
+            self.model.base = newModelBase;
+            self.model.animate(0);
         end
     end
-end
+ end

@@ -39,14 +39,23 @@ hold on
 workspace = [-3 3 -5 5 0 5];
 
 %% Setup joystick
-[JS_1, joy, joy_info] = JoystickClass();
+[JS_1, joy, joy_info, NOJOY] = JoystickClass();
 
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
-rick = Objects('Rick', '6', workspace, transl(-2,0,0), 0);
+glassBlock = Objects('GlassBlock', '6', workspace, transl(-2,0,0), 0);
 
-environmentObjects = [van, eStop1, rick];
+environmentObjects = [van, eStop1, glassBlock];
+
+% Set up light curtain
+lightCurtain.X = [-0.95, 0.8];
+lightCurtain.Y = [-2.9, -2.9];
+lightCurtain.Z = [2.3, 2.3];
+
+for lineIt = lightCurtain.Z(1):-0.1:0.5
+    plot3(lightCurtain.X,lightCurtain.Y,[lineIt, lineIt],'--r','LineWidth',0.1);
+end
 
 %  setting up objects
 ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
@@ -59,6 +68,7 @@ spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), pi);
 shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 
 soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
+soda.setJoy(JS_1, joy, NOJOY);
 rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
 
 moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, ice];
@@ -69,6 +79,8 @@ view(300,20);
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.15,-1.6,0.605 + 0.4));
 N6_2 = D6Model('N6_2',workspace, transl(-0.15,-2.4,0.605 + 0.4));
+N6_1.setJoy(JS_1, joy, NOJOY);
+N6_2.setJoy(JS_1, joy, NOJOY);
 
 RobotArms = [N6_1, N6_2];
 
@@ -77,6 +89,9 @@ q = deg2rad([90,90,90,0,0,0]);
 N6_1.model.animate(q);
 N6_2.model.animate(q);
 
+% Square.model.base = Square.model.base * transl([0, 0.1, 0]);
+% Square.model.animate(0);
+
 % N6_2.model.teach
 %
 % pause(0.1);
@@ -84,12 +99,39 @@ N6_2.model.animate(q);
 
 % onTheRocks([N6_2, N6_1],[wildT, glass],van);
 % shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
-% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[van, eStop1, rick])
+
+glassBlock.model.base = transl([-0.6,-1,1.50]);
+glassBlock.model.animate(0);
+
+% Adjust view
+view(300,20);
+
+%% Test joystick jogging N6
+while(1)
+    N6_1.joggingLoop(0.01, 1)
+    pause(0.1)
+end
+
+%% Test joystick jogging soda
+while(1)
+    soda.joggingLoop(0.01, 1)
+    pause(0.1)
+end
+%%
+stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
 'done'
 
 %MoveQMatrix(N6_1, q, [], [van]);
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);
+
+%% this section to check light curtain
+Square = Objects('Square', '1', workspace, transl([-4,-4,1.5]), 0);
+
+% Adjust view
+view(300,20);
+
+testLightCurtain(Square, lightCurtain);
 
 end
 
