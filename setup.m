@@ -72,9 +72,6 @@ rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
 
 moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, []];
 
-% Adjust view
-view(300,20);
-
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.15,-1.6,0.605 + 0.4));
 N6_2 = D6Model('N6_2',workspace, transl(-0.15,-2.4,0.605 + 0.4));
