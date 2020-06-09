@@ -101,6 +101,15 @@ N6_2.model.animate(q);
 
 glassBlock.model.base = transl([-0.6,-1,1.50]);
 glassBlock.model.animate(0);
+
+% Adjust view
+view(300,20);
+
+%% Test joystick translation
+while(1)
+    N6_1.joggingLoop(0.01, 1)
+    pause(0.1)
+end
 %%
 stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
@@ -111,6 +120,9 @@ stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
 %% this section to check light curtain
 Square = Objects('Square', '1', workspace, transl([-4,-4,1.5]), 0);
+
+% Adjust view
+view(300,20);
 
 testLightCurtain(Square, lightCurtain);
 

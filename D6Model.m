@@ -244,34 +244,51 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             end
         end
         
-        function [newEndEffector] = joggingLoop(self)
+        function [newEndEffector] = joggingLoop(self, increments, debug)
             % Each time this jogging function is run, it will obtain the
             % end effector position, and apply a slight offset to it.
             % 
             % Run this in a while loop
             %   Check stop > Run joggingLoop > Apply transform
             [self.axes, self.buttons, self.povs] = self.joyObj.JoystickRead(self.joy);
-            currentEndPose = self.model.getPose();
+            currentEndPose = self.getPose();
             
             % For each button state, apply a certain offset to the current
             % end effector transform, and calculate the joint positions
             % from that
             
-            if (self.buttons(1) == 1)
-                newEndEffector = currentEndPose * transl([0.1, 0, 0]);
+            newEndEffector = currentEndPose;
+            
+            if (self.axes(1) > 0.5)
+                newEndEffector = currentEndPose * transl([increments, 0, 0]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
             end
             
-            if (self.buttons(2) == 1)
-                newEndEffector = currentEndPose * transl([-0.1, 0, 0]);
+            if (self.axes(1) < -0.5)
+                newEndEffector = currentEndPose * transl([-increments, 0, 0]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
             end
             
-            if (self.buttons(3) == 1)
-                newEndEffector = currentEndPose * transl([0, 0.1, 0]);
+            if (self.axes(2) > 0.5)
+                newEndEffector = currentEndPose * transl([0, increments, 0]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
             end
             
-            if (self.buttons(4) == 1)
-                newEndEffector = currentEndPose * transl([0, -0.1, 0]);
+            if (self.axes(2) < -0.5)
+                newEndEffector = currentEndPose * transl([0, -increments, 0]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
             end
+            
+            q  = self.model.ikcon(newEndEffector, self.model.getpos);
+            self.model.animate(q);
         end
     end
 end
