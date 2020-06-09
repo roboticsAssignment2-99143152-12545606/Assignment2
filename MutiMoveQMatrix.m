@@ -48,7 +48,7 @@ for qStep = 1:stepsize:qSize
             if isempty(Objects1) == 0
                 newBase = Robot_Arm1.model.fkine(q);
             end
-            for i = 1:size(Objects,2)
+            for i = 1:size(Objects1,2)
                 Objects1(i).model.base = newBase * trotx(Objects1(i).rot);
                 Objects1(i).model.animate(0);
             end
@@ -90,7 +90,7 @@ for qStep = 1:stepsize:qSize
             if isempty(Objects2) == 0
                 newBase = Robot_Arm2.model.fkine(q);
             end
-            for i = 1:size(Objects,2)
+            for i = 1:size(Objects2,2)
                 Objects2(i).model.base = newBase * trotx(Objects2(i).rot);
                 Objects2(i).model.animate(0);
             end
