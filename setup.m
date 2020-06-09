@@ -44,9 +44,9 @@ workspace = [-3 3 -5 5 0 5];
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
-glassBlock = Objects('GlassBlock', '6', workspace, transl(-2,0,0), 0);
+colObj = Objects('CollisionObject', '6', workspace, transl(-0.6,-2,1.4), 0);
 
-environmentObjects = [van, eStop1, glassBlock];
+environmentObjects = [van, eStop1, colObj];
 
 % Set up light curtain
 lightCurtain.X = [-0.95, 0.8];
@@ -68,7 +68,6 @@ spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), pi);
 shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 
 soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
-soda.setJoy(JS_1, joy, NOJOY);
 rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
 
 moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, ice];
@@ -100,25 +99,26 @@ N6_2.model.animate(q);
 % onTheRocks([N6_2, N6_1],[wildT, glass],van);
 % shakenNotstired([N6_1, N6_2],[smirn,glass, shakerTop],[van, eStop1, rick])
 
-glassBlock.model.base = transl([-0.6,-1,1.50]);
-glassBlock.model.animate(0);
-
 % Adjust view
 view(300,20);
 
 %% Test joystick jogging N6
-% while(1)
-%     N6_1.joggingLoop(0.01, 1)
-%     pause(0.1)
-% end
-% 
-% %% Test joystick jogging soda
-% while(1)
-%     soda.joggingLoop(0.01, 1)
-%     pause(0.1)
-% end
+%while(1)
+%    N6_1.joggingLoop(0.01, 1)
+%    pause(0.1)
+%end
+%
+%% Test joystick jogging a given item
+%item2set = colObj;
+%
+%item2set.setJoy(JS_1, joy, NOJOY);
+%
+%while(1)
+%    item2set.joggingLoop(0.01, 1)
+%    pause(0.1)
+%end
 %%
-stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
+stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[colObj])
 
 % 'done'
 
