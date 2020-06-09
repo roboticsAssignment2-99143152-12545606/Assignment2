@@ -107,31 +107,31 @@ glassBlock.model.animate(0);
 view(300,20);
 
 %% Test joystick jogging N6
-while(1)
-    N6_1.joggingLoop(0.01, 1)
-    pause(0.1)
-end
-
-%% Test joystick jogging soda
-while(1)
-    soda.joggingLoop(0.01, 1)
-    pause(0.1)
-end
+% while(1)
+%     N6_1.joggingLoop(0.01, 1)
+%     pause(0.1)
+% end
+% 
+% %% Test joystick jogging soda
+% while(1)
+%     soda.joggingLoop(0.01, 1)
+%     pause(0.1)
+% end
 %%
-stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
+% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
-'done'
+% 'done'
 
 %MoveQMatrix(N6_1, q, [], [van]);
 %MoveQMatrix(N6_1, deg2rad([148,277,-93,0,0,0]),[],[van]);
 
 %% this section to check light curtain
-Square = Objects('Square', '1', workspace, transl([-4,-4,1.5]), 0);
-
-% Adjust view
-view(300,20);
-
-testLightCurtain(Square, lightCurtain);
+% Square = Objects('Square', '1', workspace, transl([-4,-4,1.5]), 0);
+% 
+% % Adjust view
+% view(300,20);
+% 
+% testLightCurtain(Square, lightCurtain);
 
 end
 
