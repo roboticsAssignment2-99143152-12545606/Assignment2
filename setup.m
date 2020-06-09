@@ -39,7 +39,7 @@ hold on
 workspace = [-3 3 -5 5 0 5];
 
 %% Setup joystick
-[JS_1, joy, joy_info] = JoystickClass();
+[JS_1, joy, joy_info, NOJOY] = JoystickClass();
 
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
@@ -78,6 +78,8 @@ view(300,20);
 % setting up  models
 N6_1 = D6Model('N6_1',workspace, transl(-0.15,-1.6,0.605 + 0.4));
 N6_2 = D6Model('N6_2',workspace, transl(-0.15,-2.4,0.605 + 0.4));
+N6_1.setJoy(JS_1, joy, NOJOY);
+N6_2.setJoy(JS_1, joy, NOJOY);
 
 RobotArms = [N6_1, N6_2];
 
