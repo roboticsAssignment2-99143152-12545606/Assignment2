@@ -3,13 +3,15 @@ function [] = stirredRumAndCoke(robots,objects,environment)
 %   Detailed explanation goes here
 
 icePose = transl(0.5,-1.25,1.15);
-[qMatrix, steps] = MoveWObjects(robots(1), icePose, [], []);
+[qMatrix1, steps1] = MoveWObjects(robots(1), icePose, [], []);
 % qMatrix(1:steps,6) = lspb(qMatrix(1,6),deg2rad(-110),steps);
-MoveQMatrix(robots(1),qMatrix,[],[environment]);
 
+% MoveQMatrix(robots(1),qMatrix,[],[]);
 rumPose = objects(1).getPose;
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, rumPose, 2, 2)
-MoveQMatrix(robots(2),qMatrix,[],[environment], 10);
+[qMatrix2, steps2] = movementLine(robots(2), robots(2).model.getpos, rumPose, 2, 2)
+% MoveQMatrix(robots(2),qMatrix,[],[], 10);
+
+MutiMoveQMatrix(robots(1),qMatrix1,[],[],1,robots(2),qMatrix2,[],[], 1);
 
 pourPose = objects(4).getPose() * transl(0,0,0.1) * troty(pi/2);
 placePose = objects(1).getPose() * troty(-pi/2);
@@ -52,7 +54,6 @@ MoveQMatrix(robots(2), qMatrix, objects(1), [environment], 1);
 pourPose = objects(4).getPose() * transl(0,0,0.1) * troty(pi/2);
 placePose = objects(2).getPose() * troty(pi/2);
 
-[qMatrix, steps] = MoveWObjects(robots(1), placePose, [], []);
 [qMatrix, steps] = movementLine(robots(1), robots(1).model.getpos, placePose, 2, 1)
 qMatrix(1:steps,6) = lspb(qMatrix(1,6),deg2rad(-110),steps);
 MoveQMatrix(robots(1),qMatrix,[],[environment]);
