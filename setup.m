@@ -23,7 +23,7 @@ function [RobotArms,moveableObjects,environmentObjects] = setup()
 
 %% init
 close all
-set(0,'DefaultFigureWindowStyle','docked')
+%set(0,'DefaultFigureWindowStyle','docked')
 clear
 clc
 % Mac run command
