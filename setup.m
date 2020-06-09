@@ -118,7 +118,7 @@ view(300,20);
 %     pause(0.1)
 % end
 %%
-% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
+stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[glassBlock])
 
 % 'done'
 
