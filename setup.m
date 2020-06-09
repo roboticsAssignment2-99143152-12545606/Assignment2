@@ -68,6 +68,7 @@ spoon = Objects('Spoon', '6', workspace, transl(-0.6,-2.6,1.57), pi);
 shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 
 soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
+soda.setJoy(JS_1, joy, NOJOY);
 rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
 
 moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, ice];
@@ -105,9 +106,15 @@ glassBlock.model.animate(0);
 % Adjust view
 view(300,20);
 
-%% Test joystick translation
+%% Test joystick jogging N6
 while(1)
     N6_1.joggingLoop(0.01, 1)
+    pause(0.1)
+end
+
+%% Test joystick jogging soda
+while(1)
+    soda.joggingLoop(0.01, 1)
     pause(0.1)
 end
 %%
