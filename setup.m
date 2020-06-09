@@ -44,7 +44,7 @@ workspace = [-3 3 -5 5 0 5];
 %%  setting up environments
 van = Objects('Van', '1', workspace, transl(0,0,0), 0);
 eStop1 = Objects('E-Stop', '5', workspace, transl(-1,1,1.4), pi/2);
-colObj = Objects('CollisionObject', '6', workspace, transl(-0.6,-2,1.4), 0);
+colObj = Objects('CollisionObject', '6', workspace, transl(-0.6,0,1.4), 0);
 
 environmentObjects = [van, eStop1, colObj];
 
@@ -58,7 +58,7 @@ for lineIt = lightCurtain.Z(1):-0.1:0.5
 end
 
 %  setting up objects
-ice = Objects('ice','2',workspace, transl(0,0,0), pi/2);
+
 wildT = Objects('WildTurkey','2',workspace, transl(0.5,-2.25,1.75), pi/2);
 smirn = Objects('Smirnoff', '3', workspace, transl(0.5,-1.65,1.75), -pi/2);
 glass = Objects('Glass', '4', workspace, transl(-0.6,-2,1.50), pi);
@@ -70,7 +70,7 @@ shakerTop = Objects('Shaker', '7', workspace, transl(-0.6,-2.3,1.4), pi);
 soda = Objects('Soda', '17', workspace, transl(-0.6,-1.4,1.75), -pi/2);
 rum = Objects('Smirnoff', '13', workspace, transl(0.5,-2.75,1.75), -pi/2);
 
-moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, ice];
+moveableObjects = [wildT,smirn,glass,spoonGlass,spoon, shakerTop, soda, rum, []];
 
 % Adjust view
 view(300,20);
@@ -118,7 +118,7 @@ view(300,20);
 %    pause(0.1)
 %end
 %%
-stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[colObj])
+% stirredRumAndCoke([N6_1, N6_2],[rum,soda,ice,glass,spoon],[colObj])
 
 % 'done'
 

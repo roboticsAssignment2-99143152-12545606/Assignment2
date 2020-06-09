@@ -25,8 +25,11 @@ for qStep = 1:stepsize:size(qMatrix,1)
             return
         end
     end
-    
-    colResult = true;
+    if size(Environment,2) == 0
+        colResult = false;
+    else
+        colResult = true;
+    end
     while colResult == true
         for i = 1:size(Environment,2)
             [movePoints, moveFaces, moveNormals] = Environment(i).getPLYData();
