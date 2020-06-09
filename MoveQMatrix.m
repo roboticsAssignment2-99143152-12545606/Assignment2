@@ -35,7 +35,11 @@ for qStep = 1:stepsize:size(qMatrix,1)
                 movePoints,moveNormals,'1');
             
             if colResult == true
-                input('Collision detected - Press enter to try again')
+                disp('Collision detected - Trying again in 2 seconds...')
+                pause(1)
+                disp('Collision detected - Trying again in 1 seconds...')
+                pause(1)
+                disp('Attempting to move again')
                 break
             end
         end
