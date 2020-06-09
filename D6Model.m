@@ -52,6 +52,10 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
             end
         end
         
+        function selfupdate(q1,q2,q3,q4,q5,q6)
+            self.model.animate([q1,q2,q3,q4,q5,q6]);
+        end
+        
         function home(self)
             self.model.animate(self.homeJoints);
         end
