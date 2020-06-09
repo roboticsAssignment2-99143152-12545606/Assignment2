@@ -291,6 +291,20 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
                 end
             end
             
+            if (self.buttons(4) == 1)
+                newEndEffector = currentEndPose * transl([0, 0, increments]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
+            end
+            
+            if (self.buttons(1) == 1)
+                newEndEffector = currentEndPose * transl([0, 0, -increments]);
+                if debug == 1
+                    disp(newEndEffector)
+                end
+            end
+            
             q  = self.model.ikcon(newEndEffector, self.model.getpos);
             self.model.animate(q);
         end
