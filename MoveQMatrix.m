@@ -17,19 +17,21 @@ for qStep = 1:stepsize:size(qMatrix,1)
         catch estop = 1;
         end
         
-        % This checks for ESTOP
-        if estop == 0
-            % Do nothing and continue - No estop present
-        else
+        while estop == 1
             disp('ESTOP DETECTED - HALTING ALL ACTIONS')
-            return
+            pause(1)
+            try estop = Robot_Arm.checkJoy();
+            catch estop = 1;
+            end
         end
     end
+    
     if size(Environment,2) == 0
         colResult = false;
     else
         colResult = true;
     end
+    
     while colResult == true
         for i = 1:size(Environment,2)
             [movePoints, moveFaces, moveNormals] = Environment(i).getPLYData();
