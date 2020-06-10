@@ -12,7 +12,7 @@ classdef JoystickClass
         %% Declare joystick
         % Returns joystick class, joy item and info associated with
         % joystick
-        %
+        % 
         % Also checks for errors, and will return a message if joystick is
         % not connected (so program does not break)
         function [self, joy, joy_info, NOJOY] = JoystickClass()
