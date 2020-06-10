@@ -2,7 +2,7 @@
 % This program was created for Assignment Task 2 of Robotics
 
 %% Authors
-% James Walsh
+% James Walsh - *****ADD SN HERE*****
 % Jonathan Wilde - 12545606
 
 function [] = DEMO()
@@ -11,7 +11,7 @@ function [] = DEMO()
 
 %% init
 close all
-set(0,'DefaultFigureWindowStyle','docked')
+% set(0,'DefaultFigureWindowStyle','docked')
 clear
 clc
 % Mac run command
