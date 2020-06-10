@@ -3,6 +3,9 @@ function result = IsCollision(robot,qMatrix,faces,vertex,faceNormals,returnOnceF
 % faces = cell2mat(faces(1));
 % vertex = cell2mat(vertex(1));
 % faceNormals = cell2mat(faceNormals(2));
+%
+% Code above is now unused - We handle this at a higher level for full
+% compatibility with the plyread() functionality in the objects class
 
 if nargin < 6
     returnOnceFound = true;
@@ -19,12 +22,6 @@ for qIndex = 1:size(qMatrix,1)
             vertOnPlane = vertex(faces(faceIndex,1)',:);
             [intersectP,check] = LinePlaneIntersection(faceNormals(faceIndex,:),vertOnPlane,tr(1:3,4,i)',tr(1:3,4,i+1)'); 
             if check == 1 && IsIntersectionPointInsideTriangle(intersectP,vertex(faces(faceIndex,:)',:))
-                % No need to plot - collision detection now works as
-                % predicted
-                %plot3(intersectP(1),intersectP(2),intersectP(3),'g*');
-                % Removed - error control will be handled at the higher
-                % level (MoveQMatrix)
-                %display('Intersection');
                 disp('Intersection')
                 plot3(intersectP(1),intersectP(2),intersectP(3),'g*')
                 result = true;

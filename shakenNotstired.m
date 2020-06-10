@@ -27,7 +27,7 @@ qMatrix((s+1):end,6) = lspb(qMatrix(s,6),deg2rad(-90),s);
 
 MoveQMatrix(robots(1), qMatrix, objects(1), [], 1);
 
-q = deg2rad([90,90,90,0,0,0])
+q = deg2rad([90,90,90,0,0,0]);
 [qMatrix, steps] = MoveWObjects(robots(1), q, [objects(1)], []);
 MoveQMatrix(robots(1), qMatrix, objects(1), [], 1);
 
@@ -47,25 +47,25 @@ shakePose = objects(2).getPose() * transl(0,0,0.2);
 MoveQMatrix(robots(2),qMatrix,[objects(3)],[]);
 
 shakePose = objects(2).getPose() * transl(0,0,0);
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2)
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3)],[], 10);
 
 shakePose = objects(2).getPose() * transl(0,0,0.3);
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2)
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3), objects(2)],[], 10);
 
-[qMatrix, steps] = movementShake(robots(2), robots(2).getPose + transl(0,0,-0.2), 4, [objects(3), objects(2)], [], 2)
+[qMatrix, steps] = movementShake(robots(2), robots(2).getPose + transl(0,0,-0.2), 4, [objects(3), objects(2)], [], 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3), objects(2)],[], 50);
 
 shakePose = glassPose;
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2)
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3), objects(2)],[], 10);
 
 shakePose = glassPose * transl(0,0,0.2);
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2)
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakePose, 2, 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3)],[], 10);
 
-[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakerPose, 2, 2)
+[qMatrix, steps] = movementLine(robots(2), robots(2).model.getpos, shakerPose, 2, 2);
 MoveQMatrix(robots(2),qMatrix,[objects(3)],[], 10);
 end
 

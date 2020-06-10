@@ -18,7 +18,7 @@ qMatrix((s+1):end,6) = lspb(qMatrix(s,6),deg2rad(-120),s);
 
 MoveQMatrix(robots(1),qMatrix,[objects(1)],[]);
 
-[qMatrix, steps] = movementPour(robots(1), [], 2, objects,[], 50)
+[qMatrix, steps] = movementPour(robots(1), [], 2, objects,[], 50);
 
 s = steps/2;
 qMatrix(1:s,6) = lspb(deg2rad(-120),deg2rad(-90),s);

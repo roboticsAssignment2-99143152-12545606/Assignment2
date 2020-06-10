@@ -1,4 +1,4 @@
-classdef D6Model < handle% setup and move the UR3 robot, as well as log its transforms
+classdef N6Model < handle% setup and move the UR3 robot, as well as log its transforms
     properties
         model;
         currentJoints;
@@ -22,7 +22,7 @@ classdef D6Model < handle% setup and move the UR3 robot, as well as log its tran
     end
     
     methods
-        function self = D6Model(name,workspace,location)
+        function self = N6Model(name,workspace,location)
             %if run with no args then run demo
             if nargin == 0
                 close all
