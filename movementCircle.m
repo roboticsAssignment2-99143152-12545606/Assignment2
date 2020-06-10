@@ -98,8 +98,6 @@ if abs(axis) == 3
     W = diag([1 1 1 0.5 0.5 0]);    % Weighting matrix for the velocity vector
 end
 
-    
-
 for i=1:steps
     x(1,i) = xs(i); % Points in x
     x(2,i) = ys(i); % Points in y
