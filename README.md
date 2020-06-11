@@ -35,11 +35,14 @@ REFERENCES
 % Collision checking
 %   Code obtained from tutorial 5, and modified for use in the assignment
 %
-% D6 Model
+% Joystick Functionality
+%   Code obtained from tutorial 11, and modified for use in the assignment
+%
+% N6 Model
 %   https://epson.com/For-Work/Robots/6-Axis/Flexion-N6-Compact-6-Axis-Robots---1000mm/p/RN6-A10SS73SS
 %
-% Crazy Hand
+% Crazy Hand - Obsolete
 %   https://www.thingiverse.com/thing:1411042
 %
-% Rick Sanchez
+% Rick Sanchez - Obsolete
 %   https://www.thingiverse.com/thing:2134321
